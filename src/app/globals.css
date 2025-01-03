@@ -2,6 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-font: "Roboto", sans-serif;
+  --secondary-font: "Montserrat", sans-serif;
+  --text-dark: #303030;
+  --text-light: #555;
+  --accent-color: #ff8400;
+  --background-overlay: rgba(255, 255, 255, 0.9);
+}
+
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--secondary-font);
+  background-image: url("/gray.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
 }
