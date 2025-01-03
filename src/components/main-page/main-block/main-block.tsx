@@ -1,44 +1,56 @@
 import React from "react";
-import Link from "next/link"; // Імпортуємо Link з next/link
+import Link from "next/link";
+import Image from "next/image";
 
 export default function MainBlock() {
   return (
     <div className="flex h-[93vh] max-h-[900px] static mt-[62px] flex-wrap">
-      {/* Блок для комп'ютерів */}
+      {/* Desktop Block */}
       <div className="xl:block md:hidden sm:hidden sm:flex absolute top-0 left-0 w-full h-full -z-10 pointer-events-none mt-20">
         <div className="absolute mt-[292px] ml-[35px] left-[75px] w-[100px]">
-          <img
+          <Image
             className="w-full h-auto transition-all duration-300 ease-in-out"
             src="/Logo18.svg"
             alt="Logo"
+            width={100}
+            height={100}
           />
         </div>
         <div className="absolute left-[125px] top-[308px] w-[65px] animate-[spin_0.85s_linear]">
-          <img
+          <Image
             className="w-full h-auto transition-all duration-300 ease-in-out"
             src="/Logo19.svg"
             alt="Logo"
+            width={65}
+            height={65}
           />
         </div>
         <div className="absolute left-[178px] top-[340px] w-[6px] animate-[moveFromHorizontal_0.9s_ease-in-out]">
-          <img
+          <Image
             className="w-full h-auto transition-all duration-300 ease-in-out"
             src="/Logo20.svg"
             alt="Logo"
+            width={6}
+            height={6}
           />
         </div>
-        <div className="absolute left-[132px] top-[392px] w-[200px] scale-[1.70]">
-          <a href="#">
-            <img src="/Logo17.svg" alt="Logo" />
-          </a>
+        <div className="absolute left-[65px] top-[372px] w-[200px] scale-[1.0]">
+          <Link href="#">
+            <Image 
+              src="/Logo17.svg" 
+              alt="Logo" 
+              width={200}
+              height={200}
+            />
+          </Link>
         </div>
       </div>
 
-      {/* Основний текстовий блок для мобільних пристроїв */}
+      {/* Mobile Text Block */}
       <div className="flex sm:hidden absolute top-0 left-0 w-full h-full flex-col justify-center text-center font-montserrat text-[#303030]">
         <div className="flex flex-col items-center">
           <span className="text-[clamp(24px,4vw,40px)] font-normal tracking-[4px]">
-            IНТЕР'ЄР
+            IНТЕР&apos;ЄР
           </span>
           <br />
           ЩО ВІДОБРАЖАЄ
@@ -46,10 +58,13 @@ export default function MainBlock() {
           ВАШ СВІТ
         </div>
         <div className="w-full">
-          <img
+          <Image
             className="w-full max-h-[60vh] object-cover mt-4 mb-4"
             src="/012.jpg"
             alt="Main Background"
+            width={1200}
+            height={800}
+            priority
           />
         </div>
         <div className="text-base font-normal text-[rgb(63,63,63)]">
@@ -61,9 +76,9 @@ export default function MainBlock() {
         </div>
       </div>
 
-      {/* Основний текстовий блок для комп'ютерів */}
+      {/* Desktop Text Block */}
       <div className="xl:block md:block sm:block hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white/90 px-[60px] py-[25px] text-center font-montserrat text-[clamp(24px,4vw,40px)] font-normal text-[#303030] leading-normal w-[max(300px,50%)] max-w-[500px] box-border">
-        <span className="tracking-[4px]">IНТЕР'ЄР</span>
+        <span className="tracking-[4px]">IНТЕР&apos;ЄР</span>
         <br />
         ЩО ВІДОБРАЖАЄ
         <br />
@@ -77,14 +92,15 @@ export default function MainBlock() {
         </div>
       </div>
 
-
-
-      {/* Фонова картинка для комп'ютерів */}
+      {/* Desktop Background Image */}
       <div className="hidden sm:block absolute top-13 right-0 w-1/2 h-full -z-10 pointer-events-none">
-        <img
+        <Image
           className="w-full h-full object-cover"
           src="/012.jpg"
           alt="Half Screen"
+          width={1200}
+          height={800}
+          priority
         />
       </div>
     </div>
