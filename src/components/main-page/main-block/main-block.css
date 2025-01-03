@@ -1,0 +1,95 @@
+/* Section 1 */
+:root {
+    --margin-top-navigation: 62px;
+    --overlay-text-color: #303030;
+    --subtitle-text-color: rgb(63, 63, 63);
+  }
+  
+  .container {
+    display: flex;
+    height: 93vh;
+    max-height: 900px;
+    position: relative;
+    margin-top: var(--margin-top-navigation);
+    flex-wrap: wrap;
+    }
+  
+  .logo-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+  }
+  
+  .logo-wrapper {
+    position: absolute;
+    margin-top: 292px;
+    margin-left: 35px;
+  }
+  
+  .logo {
+    width: 100%;
+    height: auto;
+    transition: all 0.3s ease-in-out;
+  
+  }
+  
+  /* Existing .n* classes remain unchanged */
+  .n18 {
+    left: 75px;
+    width: 100px;
+  }
+  
+  .n19 {
+    left: 90px;
+    top: 15px;
+    width: 65px;
+  }
+  
+  .n20 {
+    left: 140px;
+    top: 50px;
+    width: 6px;
+    animation: moveFromCenter 0.75s ease-in-out;
+  }
+  
+  .n17 {
+    left: 95px;
+    top: 100px;
+    width: 200px;
+    scale: 1.70;
+  }
+  
+  /* Responsive adjustments */
+  @media screen and (max-width: 768px) {
+    .container {
+      flex-direction: column;
+      height: auto;
+    }
+  
+    .logo-wrapper {
+      opacity: 0;
+    }
+  
+    .logo-wrapper-1 {
+      align-items: center;
+      
+    }
+  }
+  
+
+  @keyframes moveFromCenter {
+    from {
+      left: 60%;
+      /* top: 50%; */
+      transform: translate(-50%, -50%);
+    }
+    to {
+      left: 140px;
+      top: 50px;
+      transform: translate(0, 0);
+    }
+  }
