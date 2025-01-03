@@ -16,6 +16,19 @@ export default {
         montserrat: ["Montserrat", "sans-serif"],
         roboto: ["Roboto", "sans-serif"],
       },
+      keyframes: {
+        moveFromHorizontal: {
+          'from': {
+            transform: 'translateX(700px)',
+          },
+          'to': {
+            transform: 'translateX(0px)', // Змінити значення на потрібне вам
+          },
+        },
+      },
+      animation: {
+        moveFromHorizontal: 'moveFromHorizontal 0.75s ease-in-out',
+      },
     },
   },
   plugins: [],
