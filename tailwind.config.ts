@@ -11,6 +11,10 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        customOrange: '#fa9805',
+      },
+      spacing: {
+        'dynamic-padding': 'calc(33rem * (100vw / 1920))',
       },
       fontFamily: {
         montserrat: ["Montserrat", "sans-serif"],

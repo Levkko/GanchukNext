@@ -13,7 +13,7 @@ export default function MainBlock() {
   };
 
   return (
-    <div className="flex h-[93vh] max-h-[900px] static mt-[62px] flex-wrap">
+    <div className="flex h-[93.2vh] max-h-[900px] static mt-[62px] flex-wrap overflow-hidden">
       {/* Desktop Block */}
       <div className="xl:block md:hidden sm:hidden sm:flex absolute top-0 left-0 w-full h-full -z-10 pointer-events-none mt-20">
         <div className="absolute mt-[292px] ml-[35px] left-[75px] w-[100px]">
@@ -73,7 +73,7 @@ export default function MainBlock() {
         </div>
         <div className="text-base font-normal text-[rgb(63,63,63)]">
           <Link href="/consultation">
-            <span className="text-gray-500 transition-colors duration-300 hover:text-orange-500">
+            <span className="text-gray-500 transition-colors duration-300 hover:text-customOrange">
               Безкоштовна консультація
             </span>
           </Link>
@@ -97,7 +97,7 @@ export default function MainBlock() {
         </div>
         <div className="text-base mt-[43px] mb-[10px] font-normal text-[rgb(63,63,63)]">
           <Link href="/consultation">
-            <span className="text-gray-500 transition-colors duration-300 hover:text-orange-500">
+            <span className="text-gray-500 transition-colors duration-300 hover:text-customOrange">
               Безкоштовна консультація
             </span>
           </Link>
@@ -105,15 +105,17 @@ export default function MainBlock() {
       </div>
 
       {/* Desktop Background Image */}
-      <div className="hidden sm:block absolute top-13 right-0 w-1/2 h-full -z-10 pointer-events-none">
-        <Image
-          className="w-full h-full object-cover"
-          src="/012.jpg"
-          alt="Half Screen"
-          width={1200}
-          height={800}
-          priority
-        />
+      <div className="relative w-full h-[852px]">
+        <div className="hidden sm:block absolute top-0 right-0 w-1/2 h-full overflow-hidden -z-10 pointer-events-none">
+          <Image
+            className="w-full h-full object-cover"
+            src="/012.jpg"
+            alt="Half Screen"
+            width={1200}
+            height={800}
+            priority
+          />
+        </div>
       </div>
     </div>
   );

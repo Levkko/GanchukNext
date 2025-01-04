@@ -17,7 +17,7 @@ export default function Navbar() {
 
       {/* Mobile menu button */}
       <button
-        className="md:hidden flex items-center px-3 py-2 border rounded text-black border-black hover:text-orange-500 hover:border-orange-500"
+        className="md:hidden flex items-center px-3 py-2 border rounded text-black border-black hover:text-customOrange hover:border-orange-500"
         onClick={() => setIsOpen(!isOpen)}
       >
         <svg
@@ -40,38 +40,38 @@ export default function Navbar() {
       <nav className="hidden md:flex space-x-12 mr-10 text-black font-medium text-[0.95rem] transition-colors duration-300 font-montserrat">
         <Link
           href="/"
-          className="hover:text-orange-500 transition-colors duration-300"
+          className="hover:text-customOrange transition-colors duration-300"
         >
           ГОЛОВНА
         </Link>
         <Link
           href="/products"
-          className="hover:text-orange-500 transition-colors duration-300"
+          className="hover:text-customOrange transition-colors duration-300"
         >
           ПОСЛУГИ
         </Link>
         <Link
           href="/price"
-          className="hover:text-orange-500 transition-colors duration-300"
+          className="hover:text-customOrange transition-colors duration-300"
         >
           ЦІНИ
         </Link>
         <Link
           href="/projects"
-          className="hover:text-orange-500 transition-colors duration-300"
+          className="hover:text-customOrange transition-colors duration-300"
         >
           ПРОЕКТИ
         </Link>
         <Link
           href="/contact"
-          className="hover:text-orange-500 transition-colors duration-300"
+          className="hover:text-customOrange transition-colors duration-300"
         >
           КОНТАКТИ
         </Link>
         <Link
           href="https://www.facebook.com/ganchukinteriordesign"
           target="_blank"
-          className="flex items-center space-x-2 hover:text-orange-500 transition-colors duration-300"
+          className="flex items-center space-x-2 hover:text-customOrange transition-colors duration-300"
         >
           <img
             src="/facebook.png"
@@ -82,7 +82,7 @@ export default function Navbar() {
         <Link
           href="https://www.instagram.com/ganchuk_interior_design/"
           target="_blank"
-          className="flex items-center space-x-2 hover:text-orange-500 transition-colors duration-300"
+          className="flex items-center space-x-2 hover:text-customOrange transition-colors duration-300"
         >
           <img
             src="/instagram.png"
@@ -101,35 +101,35 @@ export default function Navbar() {
         <nav className="flex flex-col items-center space-y-5 py-5 text-black font-medium text-[0.95rem] transition-colors duration-300 font-montserrat">
           <Link
             href="/"
-            className="hover:text-orange-500 transition-colors duration-300"
+            className="hover:text-customOrange transition-colors duration-300"
             onClick={() => setIsOpen(false)}
           >
             ГОЛОВНА
           </Link>
           <Link
             href="/products"
-            className="hover:text-orange-500 transition-colors duration-300"
+            className="hover:text-customOrange transition-colors duration-300"
             onClick={() => setIsOpen(false)}
           >
             ПОСЛУГИ
           </Link>
           <Link
             href="/price"
-            className="hover:text-orange-500 transition-colors duration-300"
+            className="hover:text-customOrange transition-colors duration-300"
             onClick={() => setIsOpen(false)}
           >
             ЦІНИ
           </Link>
           <Link
             href="/projects"
-            className="hover:text-orange-500 transition-colors duration-300"
+            className="hover:text-customOrange transition-colors duration-300"
             onClick={() => setIsOpen(false)}
           >
             ПРОЕКТИ
           </Link>
           <Link
             href="/contact"
-            className="hover:text-orange-500 transition-colors duration-300"
+            className="hover:text-customOrange transition-colors duration-300"
             onClick={() => setIsOpen(false)}
           >
             КОНТАКТИ
@@ -137,7 +137,7 @@ export default function Navbar() {
           <Link
             href="https://www.facebook.com/ganchukinteriordesign"
             target="_blank"
-            className="flex items-center space-x-2 hover:text-orange-500 transition-colors duration-300"
+            className="flex items-center space-x-2 hover:text-customOrange transition-colors duration-300"
             onClick={() => setIsOpen(false)}
           >
             <img
@@ -149,7 +149,7 @@ export default function Navbar() {
           <Link
             href="https://www.instagram.com/ganchuk_interior_design/"
             target="_blank"
-            className="flex items-center space-x-2 hover:text-orange-500 transition-colors duration-300"
+            className="flex items-center space-x-2 hover:text-customOrange transition-colors duration-300"
             onClick={() => setIsOpen(false)}
           >
             <img
