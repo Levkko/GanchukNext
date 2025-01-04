@@ -1,8 +1,17 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 
 export default function MainBlock() {
+  const handleAnimationEnd: React.AnimationEventHandler<HTMLDivElement> = (
+    event
+  ) => {
+    const target = event.currentTarget as HTMLElement;
+    target.classList.remove("animate-moveFade");
+  };
+
   return (
     <div className="flex h-[93vh] max-h-[900px] static mt-[62px] flex-wrap">
       {/* Desktop Block */}
@@ -36,12 +45,7 @@ export default function MainBlock() {
         </div>
         <div className="absolute left-[65px] top-[372px] w-[200px] scale-[1.0]">
           <Link href="#">
-            <Image 
-              src="/Logo17.svg" 
-              alt="Logo" 
-              width={200}
-              height={200}
-            />
+            <Image src="/Logo17.svg" alt="Logo" width={200} height={200} />
           </Link>
         </div>
       </div>
@@ -77,12 +81,20 @@ export default function MainBlock() {
       </div>
 
       {/* Desktop Text Block */}
-      <div className="xl:block md:block sm:block hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white/90 px-[60px] py-[25px] text-center font-montserrat text-[clamp(24px,4vw,40px)] font-normal text-[#303030] leading-normal w-[max(300px,50%)] max-w-[500px] box-border">
-        <span className="tracking-[4px]">IНТЕР&apos;ЄР</span>
-        <br />
-        ЩО ВІДОБРАЖАЄ
-        <br />
-        ВАШ СВІТ
+      <div
+        className="animate-moveFade xl:block md:block sm:block hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white/90 px-[60px] py-[25px] text-center font-montserrat text-[clamp(24px,4vw,40px)] font-normal text-[#303030] leading-normal w-[max(300px,50%)] max-w-[500px] box-border"
+        onAnimationEnd={handleAnimationEnd}
+      >
+        <div
+          className="opacity-0 animate-reveal"
+          style={{ animationDelay: "1s" }}
+        >
+          <span className="tracking-[4px]">IНТЕР&apos;ЄР</span>
+          <br />
+          ЩО ВІДОБРАЖАЄ
+          <br />
+          ВАШ СВІТ
+        </div>
         <div className="text-base mt-[43px] mb-[10px] font-normal text-[rgb(63,63,63)]">
           <Link href="/consultation">
             <span className="text-gray-500 transition-colors duration-300 hover:text-orange-500">
