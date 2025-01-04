@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image"; // Імпортуємо компонент Image
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,7 +12,13 @@ export default function Navbar() {
       {/* Logo visible only on mobile */}
       <div className="flex-shrink-0 md:hidden absolute left-1/2 transform -translate-x-1/2">
         <Link href="/">
-          <img src="/Logo17.svg" alt="Logo" className="h-12 scale-150" />
+          <Image
+            src="/Logo17.svg"
+            alt="Logo"
+            className="h-12 scale-150"
+            width={120} // Вказуємо ширину та висоту для оптимізації
+            height={50}
+          />
         </Link>
       </div>
 
@@ -73,10 +80,11 @@ export default function Navbar() {
           target="_blank"
           className="flex items-center space-x-2 hover:text-customOrange transition-colors duration-300"
         >
-          <img
+          <Image
             src="/facebook.png"
-            alt=""
-            style={{ width: "15px", height: "15px" }}
+            alt="Facebook logo"
+            width={15}
+            height={15}
           />
         </Link>
         <Link
@@ -84,10 +92,11 @@ export default function Navbar() {
           target="_blank"
           className="flex items-center space-x-2 hover:text-customOrange transition-colors duration-300"
         >
-          <img
+          <Image
             src="/instagram.png"
-            alt=""
-            style={{ width: "15px", height: "15px" }}
+            alt="Instagram logo"
+            width={15}
+            height={15}
           />
         </Link>
       </nav>
@@ -140,10 +149,11 @@ export default function Navbar() {
             className="flex items-center space-x-2 hover:text-customOrange transition-colors duration-300"
             onClick={() => setIsOpen(false)}
           >
-            <img
+            <Image
               src="/facebook.png"
-              alt=""
-              style={{ width: "15px", height: "15px" }}
+              alt="Facebook logo"
+              width={15}
+              height={15}
             />
           </Link>
           <Link
@@ -152,10 +162,11 @@ export default function Navbar() {
             className="flex items-center space-x-2 hover:text-customOrange transition-colors duration-300"
             onClick={() => setIsOpen(false)}
           >
-            <img
+            <Image
               src="/instagram.png"
-              alt=""
-              style={{ width: "15px", height: "15px" }}
+              alt="Instagram logo"
+              width={15}
+              height={15}
             />
           </Link>
         </nav>
