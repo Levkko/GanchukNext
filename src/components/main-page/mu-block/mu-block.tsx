@@ -46,7 +46,7 @@ export default function Mu() {
       {/* Bottom Left Block */}
       <div className="absolute pt-[0.7%] flex-col pr-[0.3%] pl-[26%] bottom-0 left-0 w-5/12 h-1/4 bg-white bg-opacity-50 flex">
         <h2 className="pt-0 font-montserrat mb-2 text-[26px] font-normal text-[#303030] leading-[1.2]">
-          Авторський <span className="text-white">супровід</span> об'єкту
+          Авторський <span className="text-white">супровід</span> об&apos;єкту
         </h2>
         <div className="w-[70px] h-[2px] bg-[#f79e1b] my-[5px]"></div>
         <p className="pt-1 font-roboto text-base text-[#555] leading-[1.3]">
