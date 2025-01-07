@@ -3,12 +3,6 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Montserrat } from "next/font/google";
-
-const montserrat = Montserrat({
-  subsets: ["latin"],
-  weight: ["100", "300", "400", "500", "700"], // Вкажіть потрібні ваги
-});
 
 export default function MainBlock() {
   const handleAnimationEnd: React.AnimationEventHandler<HTMLDivElement> = (
