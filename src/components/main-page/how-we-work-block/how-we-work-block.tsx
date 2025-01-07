@@ -1,3 +1,5 @@
+
+
 import React from "react";
 
 export default function HowWeWork() {
@@ -93,7 +95,7 @@ export default function HowWeWork() {
                 lineHeight: "1.2",
               }}
             >
-              Заміри об'єкту, фото та відеофіксація
+              Заміри об&apos;єкту, фото та відеофіксація
               <br />
               Обговорення вимог та побажань замовника
               <br />
