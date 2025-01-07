@@ -3,6 +3,12 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { Montserrat } from "next/font/google";
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["100", "300", "400", "500", "700"], // Вкажіть потрібні ваги
+});
 
 export default function MainBlock() {
   const handleAnimationEnd: React.AnimationEventHandler<HTMLDivElement> = (
@@ -21,8 +27,8 @@ export default function MainBlock() {
             className="w-full h-auto transition-all duration-300 ease-in-out"
             src="/Logo18.svg"
             alt="Logo"
-            width={100}
-            height={100}
+            width={900}
+            height={900}
           />
         </div>
         <div className="absolute left-[125px] top-[308px] w-[65px] animate-[spin_0.85s_linear]">
@@ -51,7 +57,7 @@ export default function MainBlock() {
       </div>
 
       {/* Mobile Text Block */}
-      <div className="flex sm:hidden absolute top-0 left-0 w-full h-full flex-col justify-center text-center font-montserrat text-[#303030]">
+      <div className="flex sm:hidden absolute top-0 left-0 w-full h-full flex-col justify-center text-center font-montserrat text-[#303030] z-30">
         <div className="flex flex-col items-center">
           <span className="text-[clamp(24px,4vw,40px)] font-normal tracking-[4px]">
             IНТЕР&apos;ЄР
@@ -82,12 +88,18 @@ export default function MainBlock() {
 
       {/* Desktop Text Block */}
       <div
-        className="animate-moveFade xl:block md:block sm:block hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white/90 px-[60px] py-[25px] text-center font-montserrat text-[clamp(24px,4vw,40px)] font-normal text-[#303030] leading-normal w-[max(300px,50%)] max-w-[500px] box-border"
+        className="animate-moveFade xl:block md:block sm:block hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white/90 px-[60px] py-[25px] text-center text-[#303030] leading-normal w-[max(300px,50%)] max-w-[500px] box-border z-10"
         onAnimationEnd={handleAnimationEnd}
       >
         <div
-          className="opacity-0 animate-reveal"
-          style={{ animationDelay: "1s" }}
+          className="opacity-100 animate-reveal"
+          style={{
+            animationDelay: "1s",
+            fontSize: "clamp(24px, 4vw, 40px)",
+            fontWeight: 400,
+            lineHeight: "1.5",
+            fontFamily: "'Montserrat'",
+          }}
         >
           <span className="tracking-[4px]">IНТЕР&apos;ЄР</span>
           <br />
@@ -97,7 +109,7 @@ export default function MainBlock() {
         </div>
         <div className="text-base mt-[43px] mb-[10px] font-normal text-[rgb(63,63,63)]">
           <Link href="/consultation">
-            <span className="text-gray-500 transition-colors duration-300 hover:text-customOrange">
+            <span className="text-gray-500 transition-colors duration-300 hover:text-customOrange cursor-pointer">
               Безкоштовна консультація
             </span>
           </Link>

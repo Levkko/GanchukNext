@@ -49,7 +49,7 @@ export default function Mu() {
           </div>
 
           {/* Top Right Block */}
-          <div className="absolute top-0 right-0 bg-white bg-opacity-40 p-5 max-w-[300px] max-h-[200px] overflow-hidden hidden md:block">
+          <div className="absolute top-0 right-0 bg-white bg-opacity-40 p-5 max-w-[300px] max-h-[175px] overflow-hidden hidden md:block">
             <h2 className="pt-0 font-montserrat mb-2 text-[26px] font-normal text-[#303030] leading-[1.2]">
               Більше <span className="text-white">400 проектів</span> виконаних
             </h2>

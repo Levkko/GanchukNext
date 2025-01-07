@@ -8,7 +8,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="fixed top-0 right-0 w-full bg-white bg-opacity-55 text-black flex items-center py-5 justify-between px-5 md:justify-end">
+    <div className="fixed top-0 right-0 w-full bg-white bg-opacity-55 text-black flex items-center py-5 justify-between px-5 md:justify-end z-50">
       {/* Logo visible only on mobile */}
       <div className="flex-shrink-0 md:hidden absolute left-1/2 transform -translate-x-1/2">
         <Link href="/">
@@ -44,7 +44,16 @@ export default function Navbar() {
       </button>
 
       {/* Desktop menu */}
-      <nav className="hidden md:flex space-x-12 mr-10 text-black font-medium text-[0.95rem] transition-colors duration-300 font-montserrat">
+      <nav
+        className="hidden md:flex space-x-10 mr-10 text-black font-medium text-[0.95rem] transition-colors duration-300"
+        style={{
+          animationDelay: "1s",
+          fontSize: "15px",
+          fontWeight: 400,
+          lineHeight: "1.5",
+          fontFamily: "'Montserrat'",
+        }}
+      >
         <Link
           href="/"
           className="hover:text-customOrange transition-colors duration-300"
@@ -107,7 +116,16 @@ export default function Navbar() {
           isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
       >
-        <nav className="flex flex-col items-center space-y-5 py-5 text-black font-medium text-[0.95rem] transition-colors duration-300 font-montserrat">
+        <nav
+          className="flex flex-col items-center space-y-5 py-5 text-black font-medium text-[0.95rem] transition-colors duration-300 "
+          style={{
+            animationDelay: "1s",
+            fontSize: "15px",
+            fontWeight: 400,
+            lineHeight: "1.5",
+            fontFamily: "'Montserrat'",
+          }}
+        >
           <Link
             href="/"
             className="hover:text-customOrange transition-colors duration-300"
