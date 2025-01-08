@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -12,8 +12,34 @@ export default function MainBlock() {
     target.classList.remove("animate-moveFade");
   };
 
+  const [opacity, setOpacity] = useState(1);
+  const blockRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!blockRef.current) return;
+
+      const scrollTop = window.scrollY;
+      const blockHeight = blockRef.current.offsetHeight;
+      const blockTop = blockRef.current.offsetTop;
+
+      // Зміщення: 20% висоти блоку
+      const offset = blockHeight * 0.2;
+
+      // Нова формула: прозорість стає 0 на 20% раніше
+      const newOpacity = 1 - (scrollTop - blockTop) / (blockHeight - offset);
+      setOpacity(Math.max(0, Math.min(1, newOpacity)));
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <div className="flex h-[93.2vh] max-h-[900px] static mt-[62px] flex-wrap overflow-hidden">
+    <div
+      ref={blockRef}
+      className="flex h-[93.2vh] max-h-[900px] static mt-[62px] flex-wrap overflow-hidden"
+    >
       {/* Desktop Block */}
       <div className="xl:block md:hidden sm:hidden sm:flex absolute top-0 left-0 w-full h-full -z-10 pointer-events-none mt-20">
         <div className="absolute mt-[292px] ml-[35px] left-[75px] w-[100px]">
@@ -86,7 +112,7 @@ export default function MainBlock() {
         onAnimationEnd={handleAnimationEnd}
       >
         <div
-          className="opacity-100 animate-reveal"
+          className="opacity-0 animate-reveal" // Початкова прозорість 0
           style={{
             animationDelay: "1s",
             fontSize: "clamp(24px, 4vw, 40px)",
@@ -112,7 +138,10 @@ export default function MainBlock() {
 
       {/* Desktop Background Image */}
       <div className="relative w-full h-[852px]">
-        <div className="hidden sm:block absolute top-0 right-0 w-1/2 h-full overflow-hidden -z-10 pointer-events-none">
+        <div
+          className="hidden sm:block absolute top-0 right-0 w-1/2 h-full overflow-hidden -z-10"
+          style={{ opacity }}
+        >
           <Image
             className="w-full h-full object-cover"
             src="/012.jpg"

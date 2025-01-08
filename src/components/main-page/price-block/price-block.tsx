@@ -1,8 +1,8 @@
 import React from "react";
 
-export default function WeOffer() {
+export default function Price() {
   return (
-    <div className="h-[700px] flex flex-col items-center py-10 mt-8">
+    <div className="h-[600px] flex flex-col items-center pt-10 pb-10 mt-8">
       {/* Заголовок */}
       <h1
         className="text-[24px] font-medium text-gray-800 mb-7 mt-8 text-center w-full pr-[600px]"
