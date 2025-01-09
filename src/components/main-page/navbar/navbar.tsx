@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
@@ -11,20 +11,21 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
   const [lastScrollY, setLastScrollY] = useState<number>(0);
   const [isVisible, setIsVisible] = useState<boolean>(true);
+  const [activeSection, setActiveSection] = useState<string | null>(null);
+
+  const sections = useRef<{ [key: string]: HTMLElement | null }>({});
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
-      // Логіка для зменшення хедера на десктопах
       if (window.innerWidth > 768) {
         setIsScrolled(currentScrollY > lastScrollY);
       }
 
-      // Логіка для зникнення/появлення хедера на мобільних пристроях
       if (window.innerWidth <= 768) {
         setIsVisible(currentScrollY <= lastScrollY);
-        setIsScrolled(false); // Скидаємо стан isScrolled для мобільних пристроїв
+        setIsScrolled(false);
       }
 
       setLastScrollY(currentScrollY);
@@ -34,13 +35,64 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
+  useEffect(() => {
+    // Отримуємо всі блоки, які потрібно відстежувати
+    sections.current = {
+      main: document.getElementById("main"),
+      services: document.getElementById("services"),
+      pricing: document.getElementById("pricing"),
+    };
+
+    const observerOptions = {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.5, // Налаштуйте цей параметр, щоб визначити, коли блок вважається видимим
+    };
+
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      let activeSectionFound = false;
+
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+          activeSectionFound = true;
+        }
+      });
+
+      // Якщо жоден блок не видимий (користувач прокрутив нижче останнього блоку)
+      if (!activeSectionFound) {
+        setActiveSection(null);
+      }
+    };
+
+    const observer = new IntersectionObserver(
+      observerCallback,
+      observerOptions
+    );
+
+    // Додаємо спостерігач для кожного блоку
+    Object.values(sections.current).forEach((section) => {
+      if (section) {
+        observer.observe(section);
+      }
+    });
+
+    return () => {
+      Object.values(sections.current).forEach((section) => {
+        if (section) {
+          observer.unobserve(section);
+        }
+      });
+    };
+  }, []);
+
   const handleScroll = (id: string): void => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
 
   const scrollToTop = (e: React.MouseEvent): void => {
     e.preventDefault();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
     setTimeout(() => router.push("/"), 1000);
   };
 
@@ -54,11 +106,31 @@ export default function Navbar() {
     >
       {/* Соціальні мережі для мобільних пристроїв */}
       <div className="flex space-x-4 md:hidden">
-        <Link href="https://www.facebook.com/ganchukinteriordesign" target="_blank" rel="noopener noreferrer">
-          <Image src="/facebook.png" alt="Facebook" width={20.5} height={20.5} className="w-[20.5px] h-[20.5px]" />
+        <Link
+          href="https://www.facebook.com/ganchukinteriordesign"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Image
+            src="/facebook.png"
+            alt="Facebook"
+            width={20.5}
+            height={20.5}
+            className="w-[20.5px] h-[20.5px]"
+          />
         </Link>
-        <Link href="https://www.instagram.com/ganchuk_interior_design/" target="_blank" rel="noopener noreferrer">
-          <Image src="/instagram.png" alt="Instagram" width={20.5} height={20.5} className="w-[20.5px] h-[20.5px]" />
+        <Link
+          href="https://www.instagram.com/ganchuk_interior_design/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Image
+            src="/instagram.png"
+            alt="Instagram"
+            width={20.5}
+            height={20.5}
+            className="w-[20.5px] h-[20.5px]"
+          />
         </Link>
       </div>
 
@@ -68,7 +140,9 @@ export default function Navbar() {
           <Image
             src="/Logo17.svg"
             alt="Logo"
-            className={`h-12 scale-150 ${isScrolled ? "h-10 scale-125" : "h-12 scale-150"} transition-all duration-300`}
+            className={`h-12 scale-150 ${
+              isScrolled ? "h-10 scale-125" : "h-12 scale-150"
+            } transition-all duration-300`}
             width={120}
             height={50}
           />
@@ -98,43 +172,101 @@ export default function Navbar() {
 
       {/* Десктопне меню */}
       <nav className="hidden md:flex space-x-10 mr-10 text-black font-medium text-[0.95rem] transition-colors duration-300 desktop-nav">
-        <Link href="/" className="hover:text-customOrange transition-colors duration-300" onClick={scrollToTop}>
+        <Link
+          href="/"
+          className={`hover:text-customOrange transition-colors duration-300 ${
+            activeSection === "main" ? "text-customOrange" : ""
+          }`}
+          onClick={scrollToTop}
+          style={{
+            fontWeight: "400",
+          }}
+        >
           ГОЛОВНА
         </Link>
         <Link
           href="#services"
-          className="hover:text-customOrange transition-colors duration-300"
+          className={`hover:text-customOrange transition-colors duration-300 ${
+            activeSection === "services" ? "text-customOrange" : ""
+          }`}
           onClick={(e) => {
             e.preventDefault();
-            handleScroll('services');
+            handleScroll("services");
+          }}
+          style={{
+            fontWeight: "400",
           }}
         >
           ПОСЛУГИ
         </Link>
         <Link
           href="#pricing"
-          className="hover:text-customOrange transition-colors duration-300"
+          className={`hover:text-customOrange transition-colors duration-300 ${
+            activeSection === "pricing" ? "text-customOrange" : ""
+          }`}
           onClick={(e) => {
             e.preventDefault();
-            handleScroll('pricing');
+            handleScroll("pricing");
+          }}
+          style={{
+            fontWeight: "400",
           }}
         >
           ЦІНИ
         </Link>
-        <Link href="/projects-page" className="hover:text-customOrange transition-colors duration-300">
+        <Link
+          href="/projects-page"
+          className="hover:text-customOrange transition-colors duration-300"
+          style={{
+            fontWeight: "400",
+          }}
+        >
           ПРОЕКТИ
         </Link>
-        <Link href="/contacts-page" className="hover:text-customOrange transition-colors duration-300">
+        <Link
+          href="/contacts-page"
+          className="hover:text-customOrange transition-colors duration-300"
+          style={{
+            fontWeight: "400",
+          }}
+        >
           КОНТАКТИ
         </Link>
-        <Link href="https://www.facebook.com/ganchukinteriordesign" target="_blank" className="flex items-center space-x-2 hover:text-customOrange transition-colors duration-300">
-          <Image src="/facebook.png" alt="Facebook logo" width={15} height={15} />
+        <Link
+          href="https://www.facebook.com/ganchukinteriordesign"
+          target="_blank"
+          className="flex items-center space-x-2 hover:text-customOrange transition-colors duration-300"
+        >
+          <Image
+            src="/facebook.png"
+            alt="Facebook logo"
+            width={15}
+            height={15}
+          />
         </Link>
-        <Link href="https://www.instagram.com/ganchuk_interior_design/" target="_blank" className="flex items-center space-x-2 hover:text-customOrange transition-colors duration-300">
-          <Image src="/instagram.png" alt="Instagram logo" width={15} height={15} />
+        <Link
+          href="https://www.instagram.com/ganchuk_interior_design/"
+          target="_blank"
+          className="flex items-center space-x-2 hover:text-customOrange transition-colors duration-300"
+        >
+          <Image
+            src="/instagram.png"
+            alt="Instagram logo"
+            width={15}
+            height={15}
+          />
         </Link>
-        <Link href="https://t.me/ganchukihor/" target="_blank" className="flex items-center space-x-2 hover:text-customOrange transition-colors duration-300">
-          <Image src="/telegram.png" alt="Telegram logo" width={18} height={18} />
+        <Link
+          href="https://t.me/ganchukihor/"
+          target="_blank"
+          className="flex items-center space-x-2 hover:text-customOrange transition-colors duration-300"
+        >
+          <Image
+            src="/telegram.png"
+            alt="Telegram logo"
+            width={18}
+            height={18}
+          />
         </Link>
       </nav>
 
@@ -147,47 +279,96 @@ export default function Navbar() {
         <nav className="flex flex-col items-center space-y-5 py-5 text-black font-medium text-[0.95rem] transition-colors duration-300">
           <Link
             href="/"
-            className="hover:text-customOrange transition-colors duration-300"
+            className={`hover:text-customOrange transition-colors duration-300 ${
+              activeSection === "main" ? "text-customOrange" : ""
+            }`}
             onClick={(e) => {
               scrollToTop(e);
               setIsOpen(false);
+            }}
+            style={{
+              fontWeight: "400",
             }}
           >
             ГОЛОВНА
           </Link>
           <Link
             href="#services"
-            className="hover:text-customOrange transition-colors duration-300"
+            className={`hover:text-customOrange transition-colors duration-300 ${
+              activeSection === "services" ? "text-customOrange" : ""
+            }`}
             onClick={(e) => {
               e.preventDefault();
-              handleScroll('services');
+              handleScroll("services");
               setIsOpen(false);
+            }}
+            style={{
+              fontWeight: "400",
             }}
           >
             ПОСЛУГИ
           </Link>
           <Link
             href="#pricing"
-            className="hover:text-customOrange transition-colors duration-300"
+            className={`hover:text-customOrange transition-colors duration-300 ${
+              activeSection === "pricing" ? "text-customOrange" : ""
+            }`}
             onClick={(e) => {
               e.preventDefault();
-              handleScroll('pricing');
+              handleScroll("pricing");
               setIsOpen(false);
+            }}
+            style={{
+              fontWeight: "400",
             }}
           >
             ЦІНИ
           </Link>
-          <Link href="/projects-page" className="hover:text-customOrange transition-colors duration-300" onClick={() => setIsOpen(false)}>
+          <Link
+            href="/projects-page"
+            className="hover:text-customOrange transition-colors duration-300"
+            onClick={() => setIsOpen(false)}
+            style={{
+              fontWeight: "400",
+            }}
+          >
             ПРОЕКТИ
           </Link>
-          <Link href="/contacts-page" className="hover:text-customOrange transition-colors duration-300" onClick={() => setIsOpen(false)}>
+          <Link
+            href="/contacts-page"
+            className="hover:text-customOrange transition-colors duration-300"
+            onClick={() => setIsOpen(false)}
+            style={{
+              fontWeight: "400",
+            }}
+          >
             КОНТАКТИ
           </Link>
-          <Link href="https://www.facebook.com/ganchukinteriordesign" target="_blank" className="flex items-center space-x-2 hover:text-customOrange transition-colors duration-300" onClick={() => setIsOpen(false)}>
-            <Image src="/facebook.png" alt="Facebook logo" width={15} height={15} />
+          <Link
+            href="https://www.facebook.com/ganchukinteriordesign"
+            target="_blank"
+            className="flex items-center space-x-2 hover:text-customOrange transition-colors duration-300"
+            onClick={() => setIsOpen(false)}
+          >
+            <Image
+              src="/facebook.png"
+              alt="Facebook logo"
+              width={15}
+              height={15}
+            />
           </Link>
-          <Link href="https://www.instagram.com/ganchuk_interior_design/" target="_blank" className="flex items-center space-x-2 hover:text-customOrange transition-colors duration-300" onClick={() => setIsOpen(false)}>
-            <Image src="/instagram.png" alt="Instagram logo" width={15} height={15} />
+          <Link
+            href="https://www.instagram.com/ganchuk_interior_design/"
+            target="_blank"
+            className="flex items-center space-x-2 hover:text-customOrange transition-colors duration-300"
+            onClick={() => setIsOpen(false)}
+          >
+            <Image
+              src="/instagram.png"
+              alt="Instagram logo"
+              width={15}
+              height={15}
+            />
           </Link>
         </nav>
       </div>

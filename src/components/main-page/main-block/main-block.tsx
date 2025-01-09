@@ -37,6 +37,7 @@ export default function MainBlock() {
 
   return (
     <div
+    id="main"
       ref={blockRef}
       className="flex min-h-[93.2vh] max-h-[900px] static mt-[62px] flex-wrap overflow-hidden relative w-full" // Змінено h-[93.2vh] на min-h-[93.2vh]
     >
