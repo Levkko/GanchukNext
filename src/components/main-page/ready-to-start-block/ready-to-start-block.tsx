@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState, ReactNode } from "react"; // Удален ненужный импорт Suspense
+import React, { useEffect, useRef, useState, ReactNode } from "react";
 import Image from "next/image";
 
 interface RevealElementProps {
@@ -13,7 +13,7 @@ const RevealElement: React.FC<RevealElementProps> = ({ children }) => {
   const elementRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const currentElement = elementRef.current; // Сохраняем текущее значение ref
+    const currentElement = elementRef.current;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -25,7 +25,7 @@ const RevealElement: React.FC<RevealElementProps> = ({ children }) => {
       {
         root: null,
         rootMargin: '0px',
-        threshold: 0.1, // Настройка видимости элемента
+        threshold: 0.1,
       }
     );
 
@@ -35,7 +35,7 @@ const RevealElement: React.FC<RevealElementProps> = ({ children }) => {
 
     return () => {
       if (currentElement) {
-        observer.unobserve(currentElement); // Используем сохраненное значение
+        observer.unobserve(currentElement);
       }
     };
   }, []);
@@ -44,7 +44,7 @@ const RevealElement: React.FC<RevealElementProps> = ({ children }) => {
     if (isVisible) {
       const timeoutId = setTimeout(() => {
         setIsAnimated(true);
-      }, 500); // Задержка анимации
+      }, 500);
 
       return () => clearTimeout(timeoutId);
     }
@@ -67,7 +67,7 @@ export default function Ready() {
         {/* Ліва частина: Зображення */}
         <div className="w-full md:w-5/12 flex justify-center items-center mb-6 md:mb-0">
           <Image
-            src="/back.jpg" // Замініть на ваш шлях до зображення
+            src="/back.jpg"
             alt="Couple sitting back-to-back"
             width={1028}
             height={813}
