@@ -3,8 +3,17 @@
 import React, { useState } from "react";
 import Image from "next/image";
 
+// Define a type for the image objects
+type ImageType = {
+  src: string;
+  alt: string;
+  link: string;
+  hoverText: string;
+  category: "житлові" | "громадські";
+};
+
 // Масив з 30 зображень
-const images: { src: string; alt: string; link: string; hoverText: string; category: "житлові" | "громадські" }[] = [
+const images: ImageType[] = [
   { src: "/001.png", alt: "Background 1", link: "/project1", hoverText: "БУДИНОЧОК ДЛЯ МОЛОДОЇ СІМ'Ї В ПЕРЕДМІСТІ ТЕРНОПОЛЯ", category: "житлові" },
   { src: "/002.png", alt: "Background 2", link: "/project2", hoverText: "ПЕНТХАУС В ЦЕНТРІ ІВАНО ФРАНКІВСЬКА", category: "житлові" },
   { src: "/003.png", alt: "Background 3", link: "/project3", hoverText: "ПЕНТХАУС У М.КЕЛЬН, НІМЕЧЧИНА", category: "житлові" },
@@ -186,7 +195,7 @@ export default function LazyProjects() {
 }
 
 // Функція для розбиття масиву на групи по 3 зображення (для ПК)
-const chunkArray = (arr: any[], size: number) => {
+const chunkArray = (arr: ImageType[], size: number): ImageType[][] => {
   return Array.from({ length: Math.ceil(arr.length / size) }, (v, i) =>
     arr.slice(i * size, i * size + size)
   );

@@ -64,7 +64,7 @@ export default function Ready() {
 
       {/* Текст внизу */}
       <p className="text-gray-700 text-center mt-10 text-[22px] lg:text-[30px] animate-reveal">
-        Створюємо інтер'єр, який відображає ваш світ
+        Створюємо інтер&apos;єр, який відображає ваш світ
       </p>
     </div>
   );

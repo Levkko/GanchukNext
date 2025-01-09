@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image"; // Import the Image component from next/image
 
 export default function Footer() {
   return (
@@ -14,13 +15,31 @@ export default function Footer() {
       </h1>
       <div className="flex space-x-4">
         <Link href="https://www.facebook.com/ganchukinteriordesign" target="_blank" rel="noopener noreferrer">
-          <img src="/facebook.png" alt="Facebook" className="w-[23.5px] h-[23.5px]" />
+          <Image
+            src="/facebook.png"
+            alt="Facebook"
+            width={23.5}
+            height={23.5}
+            className="w-[23.5px] h-[23.5px]"
+          />
         </Link>
         <Link href="https://www.instagram.com/ganchuk_interior_design/" target="_blank" rel="noopener noreferrer">
-          <img src="/instagram.png" alt="Twitter" className="w-[23.5px] h-[23.5px]" />
+          <Image
+            src="/instagram.png"
+            alt="Instagram"
+            width={23.5}
+            height={23.5}
+            className="w-[23.5px] h-[23.5px]"
+          />
         </Link>
         <Link href="https://t.me/ganchukihor/" target="_blank" rel="noopener noreferrer">
-          <img src="/telegram.png" alt="Instagram" className="w-[23.5px] h-[23.5px]" />
+          <Image
+            src="/telegram.png"
+            alt="Telegram"
+            width={23.5}
+            height={23.5}
+            className="w-[23.5px] h-[23.5px]"
+          />
         </Link>
       </div>
     </div>
