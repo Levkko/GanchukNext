@@ -121,7 +121,7 @@ export default function Ready() {
       {/* Текст внизу з анімацією */}
       <RevealElement>
         <p className="text-gray-700 text-center mt-10 text-[22px] lg:text-[30px]">
-          Створюємо інтер'єр, який відображає ваш світ
+          Створюємо інтер&apos;єр, який відображає ваш світ
         </p>
       </RevealElement>
     </div>
