@@ -1,5 +1,6 @@
 import "../components/Montserrat.css";
 
+import ScrollRestoration from "@/components/scrollRestoration";
 import Navbar from "@/components/main-page/navbar/navbar";
 import MainBlock from "@/components/main-page/main-block/main-block";
 import Mu from "@/components/main-page/mu-block/mu-block";
@@ -12,9 +13,10 @@ import Footer from "@/components/main-page/footer/footer";
 
 export default function Home() {
   return (
-    <main>
-      <>
-        <Navbar />
+    <>
+      <ScrollRestoration />
+      <Navbar />
+      <main>
         <MainBlock />
         <Mu />
         <HowWeWork />
@@ -22,8 +24,8 @@ export default function Home() {
         <Question />
         <OurProjects />
         <Ready />
-        <Footer />
-      </>
-    </main>
+      </main>
+      <Footer />
+    </>
   );
 }

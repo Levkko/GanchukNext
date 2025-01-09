@@ -4,7 +4,7 @@ export default function HowWeWork() {
   return (
     <div className="h-auto flex flex-col items-center py-10 mt-8">
       {/* Заголовок для мобільної версії */}
-      <div className="font-montserrat text-[23px] font-medium text-[#303030] leading-[1.2] mt-5 mb-2 bg-white bg-opacity-40 w-screen py-1 mb-8">
+      <div className="block lg:hidden font-montserrat text-[23px] font-medium text-[#303030] leading-[1.2] mt-5 mb-2 bg-white bg-opacity-40 w-screen py-1 mb-8">
         <h1
           className="text-[24px] font-medium text-gray-800 text-center"
           style={{
@@ -17,7 +17,7 @@ export default function HowWeWork() {
 
       {/* Заголовок для десктопної версії */}
       <h1
-        className="hidden lg:block text-[24px] font-medium text-gray-800 mb-7 mt-8 text-center w-full pr-[600px]"
+        className="hidden lg:block text-[24px] font-medium text-gray-800 mb-7 mt-8 text-center w-screen pr-[600px]"
         style={{
           fontWeight: "400",
         }}

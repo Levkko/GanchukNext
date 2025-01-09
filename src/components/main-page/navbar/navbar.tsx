@@ -1,22 +1,91 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image"; // Імпортуємо компонент Image
+import Image from "next/image";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const [isVisible, setIsVisible] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      // Логіка для зменшення хедера на десктопах
+      setIsScrolled(currentScrollY > 100);
+
+      // Логіка для зникнення/появлення хедера на мобільних пристроях
+      if (window.innerWidth <= 768) {
+        if (currentScrollY > lastScrollY) {
+          // Скрол вниз — хедер зникає
+          setIsVisible(false);
+        } else {
+          // Скрол вгору — хедер з'являється
+          setIsVisible(true);
+          // Скидаємо стан isScrolled, щоб хедер був великим
+          setIsScrolled(false);
+        }
+      }
+
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [lastScrollY]);
 
   return (
-    <div className="fixed top-0 right-0 w-full bg-white bg-opacity-55 text-black flex items-center py-5 justify-between px-5 md:justify-end z-50">
+    <div
+      className={`fixed top-0 right-0 w-full bg-white bg-opacity-55 text-black flex items-center justify-between px-5 md:justify-end z-50 ${
+        isScrolled ? "py-3" : "py-5"
+      } transition-all duration-300 ${
+        isVisible ? "translate-y-0" : "-translate-y-full"
+      }`}
+    >
+      <div className="flex space-x-4 flex md:hidden">
+        <Link
+          href="https://www.facebook.com/ganchukinteriordesign"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Image
+            src="/facebook.png"
+            alt="Facebook"
+            width={20.5}
+            height={20.5}
+            className="w-[20.5px] h-[20.5px]"
+          />
+        </Link>
+        <Link
+          href="https://www.instagram.com/ganchuk_interior_design/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Image
+            src="/instagram.png"
+            alt="Instagram"
+            width={20.5}
+            height={20.5}
+            className="w-[20.5px] h-[20.5px]"
+          />
+        </Link>
+      </div>
+
       {/* Logo visible only on mobile */}
       <div className="flex-shrink-0 md:hidden absolute left-1/2 transform -translate-x-1/2">
         <Link href="/">
           <Image
             src="/Logo17.svg"
             alt="Logo"
-            className="h-12 scale-150"
-            width={120} // Вказуємо ширину та висоту для оптимізації
+            className={`h-12 scale-150 ${
+              isScrolled ? "h-10 scale-125" : "h-12 scale-150"
+            } transition-all duration-300`}
+            width={120}
             height={50}
           />
         </Link>
@@ -125,7 +194,7 @@ export default function Navbar() {
 
       {/* Mobile dropdown menu */}
       <div
-        className={`absolute top-[4.9rem] left-0 w-full bg-white bg-opacity-55 shadow-md md:hidden transition-opacity duration-300 ease-in-out ${
+        className={`absolute top-[4.9rem] left-0 w-full bg-white bg-opacity-100 shadow-md md:hidden transition-opacity duration-300 ease-in-out ${
           isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
       >
@@ -147,28 +216,28 @@ export default function Navbar() {
             ГОЛОВНА
           </Link>
           <Link
-            href="/products"
+            href="/products-page"
             className="hover:text-customOrange transition-colors duration-300"
             onClick={() => setIsOpen(false)}
           >
             ПОСЛУГИ
           </Link>
           <Link
-            href="/price"
+            href="/price-page"
             className="hover:text-customOrange transition-colors duration-300"
             onClick={() => setIsOpen(false)}
           >
             ЦІНИ
           </Link>
           <Link
-            href="/projects"
+            href="/projects-page"
             className="hover:text-customOrange transition-colors duration-300"
             onClick={() => setIsOpen(false)}
           >
             ПРОЕКТИ
           </Link>
           <Link
-            href="/contact"
+            href="/contacts-page"
             className="hover:text-customOrange transition-colors duration-300"
             onClick={() => setIsOpen(false)}
           >

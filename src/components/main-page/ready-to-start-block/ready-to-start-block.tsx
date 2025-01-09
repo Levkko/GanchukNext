@@ -1,5 +1,62 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useRef, useState, ReactNode } from "react";
 import Image from "next/image";
+
+interface RevealElementProps {
+  children: ReactNode;
+}
+
+const RevealElement: React.FC<RevealElementProps> = ({ children }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const [isAnimated, setIsAnimated] = useState(false);
+  const elementRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1, // Налаштуйте цей параметр, щоб визначити, коли елемент вважається видимим
+      }
+    );
+
+    if (elementRef.current) {
+      observer.observe(elementRef.current);
+    }
+
+    return () => {
+      if (elementRef.current) {
+        observer.unobserve(elementRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isVisible) {
+      const timeoutId = setTimeout(() => {
+        setIsAnimated(true);
+      }, 500); // Затримка в 1 секунду
+
+      return () => clearTimeout(timeoutId);
+    }
+  }, [isVisible]);
+
+  return (
+    <div
+      ref={elementRef}
+      className={`transition-opacity duration-1000 ${isAnimated ? 'opacity-100 animate-reveal' : 'opacity-0'}`}
+    >
+      {children}
+    </div>
+  );
+};
 
 export default function Ready() {
   return (
@@ -29,8 +86,7 @@ export default function Ready() {
           <p className="text-gray-700 mb-6 text-center">
             Перша консультація безкоштовна
             <br />
-             Залиште свої дані і ми сконтактуємо
-            з вами!
+            Залиште свої дані і ми сконтактуємо з вами!
           </p>
           <form className="w-full max-w-md flex flex-col items-center">
             <div className="mb-4">
@@ -62,10 +118,12 @@ export default function Ready() {
         </div>
       </div>
 
-      {/* Текст внизу */}
-      <p className="text-gray-700 text-center mt-10 text-[22px] lg:text-[30px] animate-reveal">
-        Створюємо інтер&apos;єр, який відображає ваш світ
-      </p>
+      {/* Текст внизу з анімацією */}
+      <RevealElement>
+        <p className="text-gray-700 text-center mt-10 text-[22px] lg:text-[30px]">
+          Створюємо інтер'єр, який відображає ваш світ
+        </p>
+      </RevealElement>
     </div>
   );
 }
