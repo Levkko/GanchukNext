@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState, ReactNode } from "react";
+import React, { useEffect, useRef, useState, ReactNode, Suspense } from "react";
 import Image from "next/image";
 
 interface RevealElementProps {
@@ -13,6 +13,8 @@ const RevealElement: React.FC<RevealElementProps> = ({ children }) => {
   const elementRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const currentElement = elementRef.current; // Сохраняем текущее значение ref
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -23,17 +25,17 @@ const RevealElement: React.FC<RevealElementProps> = ({ children }) => {
       {
         root: null,
         rootMargin: '0px',
-        threshold: 0.1, // Налаштуйте цей параметр, щоб визначити, коли елемент вважається видимим
+        threshold: 0.1, // Настройка видимости элемента
       }
     );
 
-    if (elementRef.current) {
-      observer.observe(elementRef.current);
+    if (currentElement) {
+      observer.observe(currentElement);
     }
 
     return () => {
-      if (elementRef.current) {
-        observer.unobserve(elementRef.current);
+      if (currentElement) {
+        observer.unobserve(currentElement); // Используем сохраненное значение
       }
     };
   }, []);
@@ -42,7 +44,7 @@ const RevealElement: React.FC<RevealElementProps> = ({ children }) => {
     if (isVisible) {
       const timeoutId = setTimeout(() => {
         setIsAnimated(true);
-      }, 500); // Затримка в 1 секунду
+      }, 500); // Задержка анимации
 
       return () => clearTimeout(timeoutId);
     }
@@ -65,7 +67,7 @@ export default function Ready() {
         {/* Ліва частина: Зображення */}
         <div className="w-full md:w-5/12 flex justify-center items-center mb-6 md:mb-0">
           <Image
-            src="/back.jpg" // замініть на ваш шлях до зображення
+            src="/back.jpg" // Замініть на ваш шлях до зображення
             alt="Couple sitting back-to-back"
             width={1028}
             height={813}
@@ -103,7 +105,7 @@ export default function Ready() {
                 className="w-[200px] p-3 placeholder-white bg-transparent border-b-2 border-white focus:outline-none focus:border-customOrange"
               />
             </div>
-            {/* Button */}
+            {/* Кнопка */}
             <div className="flex items-center justify-center mt-4">
               <button
                 className="px-8 py-3 bg-white/55 text-gray-700 text-md font-semibold border border-white shadow-[0px_1.3px_2px_2px_rgba(0,0,0,0.15)] hover:text-customOrange transition duration-300"
