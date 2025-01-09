@@ -5,17 +5,25 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [lastScrollY, setLastScrollY] = useState(0);
-  const [isVisible, setIsVisible] = useState(true);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isScrolled, setIsScrolled] = useState<boolean>(false);
+  const [lastScrollY, setLastScrollY] = useState<number>(0);
+  const [isVisible, setIsVisible] = useState<boolean>(true);
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
       // Логіка для зменшення хедера на десктопах
-      setIsScrolled(currentScrollY > 100);
+      if (window.innerWidth > 768) {
+        if (currentScrollY > lastScrollY) {
+          // Скрол вниз — хедер зменшується
+          setIsScrolled(true);
+        } else {
+          // Скрол вгору — хедер повертається до нормального розміру
+          setIsScrolled(false);
+        }
+      }
 
       // Логіка для зникнення/появлення хедера на мобільних пристроях
       if (window.innerWidth <= 768) {
@@ -38,6 +46,13 @@ export default function Navbar() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [lastScrollY]);
+
+  const handleScroll = (id: string): void => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <div
@@ -130,14 +145,22 @@ export default function Navbar() {
           ГОЛОВНА
         </Link>
         <Link
-          href="/products"
+          href="#services"
           className="hover:text-customOrange transition-colors duration-300"
+          onClick={(e) => {
+            e.preventDefault();
+            handleScroll('services');
+          }}
         >
           ПОСЛУГИ
         </Link>
         <Link
-          href="/price"
+          href="#pricing"
           className="hover:text-customOrange transition-colors duration-300"
+          onClick={(e) => {
+            e.preventDefault();
+            handleScroll('pricing');
+          }}
         >
           ЦІНИ
         </Link>
@@ -216,16 +239,24 @@ export default function Navbar() {
             ГОЛОВНА
           </Link>
           <Link
-            href="/products-page"
+            href="#services"
             className="hover:text-customOrange transition-colors duration-300"
-            onClick={() => setIsOpen(false)}
+            onClick={(e) => {
+              e.preventDefault();
+              handleScroll('services');
+              setIsOpen(false);
+            }}
           >
             ПОСЛУГИ
           </Link>
           <Link
-            href="/price-page"
+            href="#pricing"
             className="hover:text-customOrange transition-colors duration-300"
-            onClick={() => setIsOpen(false)}
+            onClick={(e) => {
+              e.preventDefault();
+              handleScroll('pricing');
+              setIsOpen(false);
+            }}
           >
             ЦІНИ
           </Link>

@@ -2,7 +2,7 @@ import React from "react";
 
 export default function HowWeWork() {
   return (
-    <div className="h-auto flex flex-col items-center py-10 mt-8">
+    <div id="services" className="h-auto flex flex-col items-center py-10 mt-8">
       {/* Заголовок для мобільної версії */}
       <div className="block lg:hidden font-montserrat text-[23px] font-medium text-[#303030] leading-[1.2] mt-5 mb-2 bg-white bg-opacity-40 w-screen py-1 mb-8">
         <h1

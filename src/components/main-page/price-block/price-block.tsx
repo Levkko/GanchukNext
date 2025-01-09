@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Price() {
   return (
-    <div className="flex flex-col items-center pt-10 pb-20 mt-8">
+    <div id="pricing" className="flex flex-col items-center pt-10 pb-20 mt-8">
       {/* Заголовок для десктопу */}
       <h1
         className="hidden lg:block text-[24px] font-medium text-gray-800 mb-7 mt-8 text-center w-full pr-[600px]"
