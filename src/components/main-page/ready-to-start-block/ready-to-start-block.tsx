@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState, ReactNode, Suspense } from "react";
+import React, { useEffect, useRef, useState, ReactNode } from "react"; // Удален ненужный импорт Suspense
 import Image from "next/image";
 
 interface RevealElementProps {
