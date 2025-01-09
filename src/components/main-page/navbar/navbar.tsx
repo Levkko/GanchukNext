@@ -73,13 +73,13 @@ export default function Navbar() {
           ЦІНИ
         </Link>
         <Link
-          href="/projects"
+          href="/projects-page"
           className="hover:text-customOrange transition-colors duration-300"
         >
           ПРОЕКТИ
         </Link>
         <Link
-          href="/contact"
+          href="/contacts-page"
           className="hover:text-customOrange transition-colors duration-300"
         >
           КОНТАКТИ
@@ -106,6 +106,19 @@ export default function Navbar() {
             alt="Instagram logo"
             width={15}
             height={15}
+          />
+        </Link>
+
+        <Link
+          href="https://t.me/ganchukihor/"
+          target="_blank"
+          className="flex items-center space-x-2 hover:text-customOrange transition-colors duration-300"
+        >
+          <Image
+            src="/telegram.png"
+            alt="Instagram logo"
+            width={18}
+            height={18}
           />
         </Link>
       </nav>

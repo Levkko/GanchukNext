@@ -38,10 +38,10 @@ export default function MainBlock() {
   return (
     <div
       ref={blockRef}
-      className="flex h-[93.2vh] max-h-[900px] static mt-[62px] flex-wrap overflow-hidden"
+      className="flex min-h-[93.2vh] max-h-[900px] static mt-[62px] flex-wrap overflow-hidden relative w-full" // Змінено h-[93.2vh] на min-h-[93.2vh]
     >
       {/* Desktop Block */}
-      <div className="xl:block md:hidden sm:hidden sm:flex absolute top-0 left-0 w-full h-full -z-10 pointer-events-none mt-20">
+      <div className="xl:block md:hidden sm:hidden sm:flex absolute top-[-30px] left-[-10px] w-full h-full -z-10 pointer-events-none mt-20">
         <div className="absolute mt-[292px] ml-[35px] left-[75px] w-[100px]">
           <Image
             className="w-full h-auto transition-all duration-300 ease-in-out"
@@ -77,12 +77,11 @@ export default function MainBlock() {
       </div>
 
       {/* Mobile Text Block */}
-      <div className="flex sm:hidden absolute top-0 left-0 w-full h-full flex-col justify-center text-center font-montserrat text-[#303030] z-30">
-        <div className="flex flex-col items-center">
-          <span className="text-[clamp(24px,4vw,40px)] font-normal tracking-[4px]">
+      <div className="flex sm:hidden absolute top-[-60px] left-0 w-full h-full flex-col justify-center text-center font-montserrat text-[#303030] z-30">
+        <div className="flex flex-col items-center text-[clamp(24px,4vw,40px)] font-normal tracking-[0px] animate-reveal pb-5">
+          <span className="tracking-[4px]">
             IНТЕР&apos;ЄР
           </span>
-          <br />
           ЩО ВІДОБРАЖАЄ
           <br />
           ВАШ СВІТ
@@ -90,14 +89,14 @@ export default function MainBlock() {
         <div className="w-full">
           <Image
             className="w-full max-h-[60vh] object-cover mt-4 mb-4"
-            src="/012.jpg"
+            src="/012+.jpg"
             alt="Main Background"
             width={1200}
             height={800}
             priority
           />
         </div>
-        <div className="text-base font-normal text-[rgb(63,63,63)]">
+        <div className="text-base pt-4 font-normal text-[rgb(63,63,63)]">
           <Link href="/consultation">
             <span className="text-gray-500 transition-colors duration-300 hover:text-customOrange">
               Безкоштовна консультація
@@ -107,44 +106,48 @@ export default function MainBlock() {
       </div>
 
       {/* Desktop Text Block */}
-      <div
-        className="animate-moveFade xl:block md:block sm:block hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white/90 px-[60px] py-[25px] text-center text-[#303030] leading-normal w-[max(300px,50%)] max-w-[500px] box-border z-10"
-        onAnimationEnd={handleAnimationEnd}
-      >
+      <div>
         <div
-          className="opacity-0 animate-reveal" // Початкова прозорість 0
-          style={{
-            animationDelay: "1s",
-            fontSize: "clamp(24px, 4vw, 40px)",
-            fontWeight: 400,
-            lineHeight: "1.5",
-            fontFamily: "'Montserrat'",
-          }}
+          className="animate-moveFade xl:block md:block sm:block hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white/90 px-[60px] py-[25px] text-center text-[#303030] leading-normal w-[max(300px,50%)] max-w-[500px] box-border z-10"
+          onAnimationEnd={handleAnimationEnd}
         >
-          <span className="tracking-[4px]">IНТЕР&apos;ЄР</span>
-          <br />
-          ЩО ВІДОБРАЖАЄ
-          <br />
-          ВАШ СВІТ
-        </div>
-        <div className="text-base mt-[43px] mb-[10px] font-normal text-[rgb(63,63,63)]">
-          <Link href="/consultation">
-            <span className="text-gray-500 transition-colors duration-300 hover:text-customOrange cursor-pointer">
-              Безкоштовна консультація
-            </span>
-          </Link>
+          <div
+            className="opacity-0 animate-reveal" // Початкова прозорість 0
+            style={{
+              animationDelay: "1s",
+              fontSize: "clamp(24px, 4vw, 40px)",
+              fontWeight: 400,
+              lineHeight: "1.5",
+              fontFamily: "'Montserrat'",
+            }}
+          >
+            <span className="tracking-[4px]">IНТЕР&apos;ЄР</span>
+            <br />
+            ЩО ВІДОБРАЖАЄ
+            <br />
+            ВАШ СВІТ
+          </div>
+          <div className="text-base mt-[43px] mb-[10px] font-normal text-[rgb(63,63,63)]">
+            <Link href="/consultation">
+              <span className="text-gray-500 transition-colors duration-300 hover:text-customOrange cursor-pointer">
+                Безкоштовна консультація
+              </span>
+            </Link>
+          </div>
         </div>
       </div>
 
       {/* Desktop Background Image */}
-      <div className="relative w-full h-[852px]">
+      <div className="relative w-full min-h-[852px]">
+        {" "}
+        {/* Змінено h-[852px] на min-h-[852px] */}
         <div
           className="hidden sm:block absolute top-0 right-0 w-1/2 h-full overflow-hidden -z-10"
           style={{ opacity }}
         >
           <Image
             className="w-full h-full object-cover"
-            src="/012.jpg"
+            src="/012+.jpg"
             alt="Half Screen"
             width={1200}
             height={800}

@@ -20,6 +20,9 @@ export default {
         montserrat: ["Montserrat", "sans-serif"],
         roboto: ["Roboto", "sans-serif"],
       },
+      screens: {
+        'custom': '780px',
+      },
       keyframes: {
         moveFromHorizontal: {
           'from': {
