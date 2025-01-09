@@ -1,10 +1,12 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 
 export default function Navbar() {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
   const [lastScrollY, setLastScrollY] = useState<number>(0);
@@ -16,97 +18,64 @@ export default function Navbar() {
 
       // Логіка для зменшення хедера на десктопах
       if (window.innerWidth > 768) {
-        if (currentScrollY > lastScrollY) {
-          // Скрол вниз — хедер зменшується
-          setIsScrolled(true);
-        } else {
-          // Скрол вгору — хедер повертається до нормального розміру
-          setIsScrolled(false);
-        }
+        setIsScrolled(currentScrollY > lastScrollY);
       }
 
       // Логіка для зникнення/появлення хедера на мобільних пристроях
       if (window.innerWidth <= 768) {
-        if (currentScrollY > lastScrollY) {
-          // Скрол вниз — хедер зникає
-          setIsVisible(false);
-        } else {
-          // Скрол вгору — хедер з'являється
-          setIsVisible(true);
-          // Скидаємо стан isScrolled, щоб хедер був великим
-          setIsScrolled(false);
-        }
+        setIsVisible(currentScrollY <= lastScrollY);
+        setIsScrolled(false); // Скидаємо стан isScrolled для мобільних пристроїв
       }
 
       setLastScrollY(currentScrollY);
     };
 
     window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
   const handleScroll = (id: string): void => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const scrollToTop = (e: React.MouseEvent): void => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setTimeout(() => router.push("/"), 1000);
   };
 
   return (
     <div
-      className={`fixed top-0 right-0 w-full bg-white bg-opacity-55 text-black flex items-center justify-between px-5 md:justify-end z-50 ${
+      className={`fixed top-0 w-full bg-white bg-opacity-55 text-black flex items-center justify-between px-5 md:justify-end z-50 ${
         isScrolled ? "py-3" : "py-5"
       } transition-all duration-300 ${
         isVisible ? "translate-y-0" : "-translate-y-full"
       }`}
     >
-      <div className="flex space-x-4 flex md:hidden">
-        <Link
-          href="https://www.facebook.com/ganchukinteriordesign"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            src="/facebook.png"
-            alt="Facebook"
-            width={20.5}
-            height={20.5}
-            className="w-[20.5px] h-[20.5px]"
-          />
+      {/* Соціальні мережі для мобільних пристроїв */}
+      <div className="flex space-x-4 md:hidden">
+        <Link href="https://www.facebook.com/ganchukinteriordesign" target="_blank" rel="noopener noreferrer">
+          <Image src="/facebook.png" alt="Facebook" width={20.5} height={20.5} className="w-[20.5px] h-[20.5px]" />
         </Link>
-        <Link
-          href="https://www.instagram.com/ganchuk_interior_design/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            src="/instagram.png"
-            alt="Instagram"
-            width={20.5}
-            height={20.5}
-            className="w-[20.5px] h-[20.5px]"
-          />
+        <Link href="https://www.instagram.com/ganchuk_interior_design/" target="_blank" rel="noopener noreferrer">
+          <Image src="/instagram.png" alt="Instagram" width={20.5} height={20.5} className="w-[20.5px] h-[20.5px]" />
         </Link>
       </div>
 
-      {/* Logo visible only on mobile */}
+      {/* Логотип для мобільних пристроїв */}
       <div className="flex-shrink-0 md:hidden absolute left-1/2 transform -translate-x-1/2">
-        <Link href="/">
+        <Link href="/" onClick={scrollToTop}>
           <Image
             src="/Logo17.svg"
             alt="Logo"
-            className={`h-12 scale-150 ${
-              isScrolled ? "h-10 scale-125" : "h-12 scale-150"
-            } transition-all duration-300`}
+            className={`h-12 scale-150 ${isScrolled ? "h-10 scale-125" : "h-12 scale-150"} transition-all duration-300`}
             width={120}
             height={50}
           />
         </Link>
       </div>
 
-      {/* Mobile menu button */}
+      {/* Кнопка мобільного меню */}
       <button
         className="md:hidden flex items-center px-3 py-2 border rounded text-black border-black hover:text-customOrange hover:border-orange-500"
         onClick={() => setIsOpen(!isOpen)}
@@ -127,21 +96,9 @@ export default function Navbar() {
         </svg>
       </button>
 
-      {/* Desktop menu */}
-      <nav
-        className="hidden md:flex space-x-10 mr-10 text-black font-medium text-[0.95rem] transition-colors duration-300"
-        style={{
-          animationDelay: "1s",
-          fontSize: "15px",
-          fontWeight: 400,
-          lineHeight: "1.5",
-          fontFamily: "'Montserrat'",
-        }}
-      >
-        <Link
-          href="/"
-          className="hover:text-customOrange transition-colors duration-300"
-        >
+      {/* Десктопне меню */}
+      <nav className="hidden md:flex space-x-10 mr-10 text-black font-medium text-[0.95rem] transition-colors duration-300 desktop-nav">
+        <Link href="/" className="hover:text-customOrange transition-colors duration-300" onClick={scrollToTop}>
           ГОЛОВНА
         </Link>
         <Link
@@ -164,77 +121,37 @@ export default function Navbar() {
         >
           ЦІНИ
         </Link>
-        <Link
-          href="/projects-page"
-          className="hover:text-customOrange transition-colors duration-300"
-        >
+        <Link href="/projects-page" className="hover:text-customOrange transition-colors duration-300">
           ПРОЕКТИ
         </Link>
-        <Link
-          href="/contacts-page"
-          className="hover:text-customOrange transition-colors duration-300"
-        >
+        <Link href="/contacts-page" className="hover:text-customOrange transition-colors duration-300">
           КОНТАКТИ
         </Link>
-        <Link
-          href="https://www.facebook.com/ganchukinteriordesign"
-          target="_blank"
-          className="flex items-center space-x-2 hover:text-customOrange transition-colors duration-300"
-        >
-          <Image
-            src="/facebook.png"
-            alt="Facebook logo"
-            width={15}
-            height={15}
-          />
+        <Link href="https://www.facebook.com/ganchukinteriordesign" target="_blank" className="flex items-center space-x-2 hover:text-customOrange transition-colors duration-300">
+          <Image src="/facebook.png" alt="Facebook logo" width={15} height={15} />
         </Link>
-        <Link
-          href="https://www.instagram.com/ganchuk_interior_design/"
-          target="_blank"
-          className="flex items-center space-x-2 hover:text-customOrange transition-colors duration-300"
-        >
-          <Image
-            src="/instagram.png"
-            alt="Instagram logo"
-            width={15}
-            height={15}
-          />
+        <Link href="https://www.instagram.com/ganchuk_interior_design/" target="_blank" className="flex items-center space-x-2 hover:text-customOrange transition-colors duration-300">
+          <Image src="/instagram.png" alt="Instagram logo" width={15} height={15} />
         </Link>
-
-        <Link
-          href="https://t.me/ganchukihor/"
-          target="_blank"
-          className="flex items-center space-x-2 hover:text-customOrange transition-colors duration-300"
-        >
-          <Image
-            src="/telegram.png"
-            alt="Instagram logo"
-            width={18}
-            height={18}
-          />
+        <Link href="https://t.me/ganchukihor/" target="_blank" className="flex items-center space-x-2 hover:text-customOrange transition-colors duration-300">
+          <Image src="/telegram.png" alt="Telegram logo" width={18} height={18} />
         </Link>
       </nav>
 
-      {/* Mobile dropdown menu */}
+      {/* Мобільне меню */}
       <div
-        className={`absolute top-[4.9rem] left-0 w-full bg-white bg-opacity-100 shadow-md md:hidden transition-opacity duration-300 ease-in-out ${
+        className={`absolute top-[4.9rem] left-0 w-full bg-white shadow-md md:hidden transition-opacity duration-300 ease-in-out ${
           isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
       >
-        <nav
-          className="flex flex-col items-center space-y-5 py-5 text-black font-medium text-[0.95rem] transition-colors duration-300 "
-          style={{
-            animationDelay: "1s",
-            fontSize: "15px",
-            fontWeight: 400,
-            lineHeight: "1.5",
-            fontFamily: "'Montserrat'",
-          }}
-        >
+        <nav className="flex flex-col items-center space-y-5 py-5 text-black font-medium text-[0.95rem] transition-colors duration-300">
           <Link
             href="/"
             className="hover:text-customOrange transition-colors duration-300"
-            onClick={() => setIsOpen(false)}
+            onClick={(e) => {
+              scrollToTop(e);
+              setIsOpen(false);
+            }}
           >
             ГОЛОВНА
           </Link>
@@ -260,45 +177,17 @@ export default function Navbar() {
           >
             ЦІНИ
           </Link>
-          <Link
-            href="/projects-page"
-            className="hover:text-customOrange transition-colors duration-300"
-            onClick={() => setIsOpen(false)}
-          >
+          <Link href="/projects-page" className="hover:text-customOrange transition-colors duration-300" onClick={() => setIsOpen(false)}>
             ПРОЕКТИ
           </Link>
-          <Link
-            href="/contacts-page"
-            className="hover:text-customOrange transition-colors duration-300"
-            onClick={() => setIsOpen(false)}
-          >
+          <Link href="/contacts-page" className="hover:text-customOrange transition-colors duration-300" onClick={() => setIsOpen(false)}>
             КОНТАКТИ
           </Link>
-          <Link
-            href="https://www.facebook.com/ganchukinteriordesign"
-            target="_blank"
-            className="flex items-center space-x-2 hover:text-customOrange transition-colors duration-300"
-            onClick={() => setIsOpen(false)}
-          >
-            <Image
-              src="/facebook.png"
-              alt="Facebook logo"
-              width={15}
-              height={15}
-            />
+          <Link href="https://www.facebook.com/ganchukinteriordesign" target="_blank" className="flex items-center space-x-2 hover:text-customOrange transition-colors duration-300" onClick={() => setIsOpen(false)}>
+            <Image src="/facebook.png" alt="Facebook logo" width={15} height={15} />
           </Link>
-          <Link
-            href="https://www.instagram.com/ganchuk_interior_design/"
-            target="_blank"
-            className="flex items-center space-x-2 hover:text-customOrange transition-colors duration-300"
-            onClick={() => setIsOpen(false)}
-          >
-            <Image
-              src="/instagram.png"
-              alt="Instagram logo"
-              width={15}
-              height={15}
-            />
+          <Link href="https://www.instagram.com/ganchuk_interior_design/" target="_blank" className="flex items-center space-x-2 hover:text-customOrange transition-colors duration-300" onClick={() => setIsOpen(false)}>
+            <Image src="/instagram.png" alt="Instagram logo" width={15} height={15} />
           </Link>
         </nav>
       </div>
