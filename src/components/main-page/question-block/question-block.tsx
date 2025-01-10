@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 export default function Question() {
   return (
@@ -18,20 +19,20 @@ export default function Question() {
           fontWeight: "400",
         }}
       >
-        Надішліть їх нам!
+        Зв'яжіться з нами
       </h1>
 
-      {/* Button */}
       <div className="flex items-center justify-center mt-4">
-        <button
-          className="px-8 py-3 bg-white/55 text-gray-700 text-md font-semibold border border-white shadow-[0px_1.3px_2px_2px_rgba(0,0,0,0.15)] hover:text-customOrange transition duration-300"
-          style={{
-            fontWeight: "400",
-          }}
-        >
-          ЗАДАТИ ЗАПИТАННЯ
-        </button>
-      </div>
+      <Link
+        href="/contacts-page" // Вкажіть шлях, на який має вести посилання
+        className="px-8 py-3 bg-white/55 text-gray-700 text-md font-semibold border border-white shadow-[0px_1.3px_2px_2px_rgba(0,0,0,0.15)] hover:text-customOrange transition duration-300"
+        style={{
+          fontWeight: "400",
+        }}
+      >
+        КОНТАКТИ
+      </Link>
+    </div>
     </div>
   );
 }

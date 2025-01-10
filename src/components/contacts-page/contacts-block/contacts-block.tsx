@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function Contacts() {
   return (
-    <div className="flex flex-col items-center pt-24 lg:pt-20 px-4">
+    <div className="flex flex-col items-center pt-24 lg:pt-16 px-4">
       <div className="max-w-5xl w-full p-4 lg:p-8 flex flex-col">
         {/* Форма з контактами зверху */}
         <div className="w-full flex flex-col items-center mb-4 lg:mb-6">
@@ -17,6 +17,9 @@ export default function Contacts() {
             <br />
             і ми сконтактуємо з вами
           </h1>
+          <p className="text-gray-700 mb-6 text-center">
+            Перша консультація безкоштовна
+          </p>
           <form className="w-full max-w-md flex flex-col lg:flex-row items-center gap-4 lg:gap-10">
             <div className="mb-4 w-full lg:w-auto">
               <input

@@ -129,7 +129,7 @@ export default function MainBlock() {
             ВАШ СВІТ
           </div>
           <div className="text-base mt-[43px] mb-[10px] font-normal text-[rgb(63,63,63)]">
-            <Link href="/consultation">
+            <Link href="/contacts-page">
               <span className="text-gray-500 transition-colors duration-300 hover:text-customOrange cursor-pointer">
                 Безкоштовна консультація
               </span>

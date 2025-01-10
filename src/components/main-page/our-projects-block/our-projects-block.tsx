@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function OurProjects() {
   return (
@@ -26,15 +27,17 @@ export default function OurProjects() {
             quality={100}
           />
           {/* Text block */}
-          <div className="absolute top-2 left-2 lg:top-4 lg:left-4 p-2 lg:p-4 bg-white bg-opacity-50 text-black text-center text-[14px] lg:text-[19px] underline">
-            <p className="ml-[20px] lg:ml-[70px] mr-2 lg:mr-10 mb-1 lg:mb-2">
-              ПЕНТХАУС У
-              <br />
-              М.КЕЛЬН,
-              <br />
-              НІМЕЧЧИНА
-            </p>
-          </div>
+          <Link href="/project3">
+            <div className="absolute top-2 left-2 lg:top-4 lg:left-4 p-2 lg:p-4 bg-white bg-opacity-50 text-black text-center text-[14px] lg:text-[19px] underline cursor-pointer">
+              <p className="ml-[20px] lg:ml-[70px] mr-2 lg:mr-10 mb-1 lg:mb-2">
+                ПЕНТХАУС У
+                <br />
+                М.КЕЛЬН,
+                <br />
+                НІМЕЧЧИНА
+              </p>
+            </div>
+          </Link>
         </div>
       </div>
 
@@ -50,28 +53,31 @@ export default function OurProjects() {
             quality={100}
           />
           {/* Text block */}
-          <div className="absolute top-2 left-2 lg:top-4 lg:left-4 p-2 lg:p-4 bg-white bg-opacity-50 text-black text-center text-[14px] lg:text-[19px] underline">
-            <p className="ml-[20px] lg:ml-[70px] mr-2 lg:mr-10 mb-1 lg:mb-2">
-              ПЕНТХАУС В
-              <br />
-              ЦЕНТРІ ІВАНО
-              <br />
-              ФРАНКІВСЬКА
-            </p>
-          </div>
+          <Link href="/project2">
+            <div className="absolute top-2 left-2 lg:top-4 lg:left-4 p-2 lg:p-4 bg-white bg-opacity-50 text-black text-center text-[14px] lg:text-[19px] underline cursor-pointer">
+              <p className="ml-[20px] lg:ml-[70px] mr-2 lg:mr-10 mb-1 lg:mb-2">
+                ПЕНТХАУС В
+                <br />
+                ЦЕНТРІ ІВАНО
+                <br />
+                ФРАНКІВСЬКА
+              </p>
+            </div>
+          </Link>
         </div>
       </div>
 
       {/* Button */}
       <div className="flex items-center justify-center mt-6 lg:mt-10">
-        <button
+        <Link
+          href="/projects-page" // Використовуйте `href` замість `to`
           className="px-6 py-2 lg:px-8 lg:py-3 bg-white/0 text-gray-700 text-sm lg:text-md font-semibold border border-white hover:text-customOrange transition duration-300"
           style={{
             fontWeight: "400",
           }}
         >
           УСІ ПРОЄКТИ
-        </button>
+        </Link>
       </div>
     </div>
   );

@@ -87,7 +87,13 @@ export default function Navbar() {
   }, []);
 
   const handleScroll = (id: string): void => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    } else {
+      // Якщо секція не знайдена, перенаправляємо на головну сторінку з хешем
+      router.push(`/#${id}`);
+    }
   };
 
   const scrollToTop = (e: React.MouseEvent): void => {
