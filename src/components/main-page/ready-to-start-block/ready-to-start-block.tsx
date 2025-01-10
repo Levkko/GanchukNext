@@ -90,24 +90,35 @@ export default function Ready() {
             <br />
             Залиште свої дані і ми сконтактуємо з вами!
           </p>
-          <form className="w-full max-w-md flex flex-col items-center">
+          <form 
+            action="https://formspree.io/f/mjkkjykv" 
+            method="POST"
+            className="w-full max-w-md flex flex-col items-center"
+          >
             <div className="mb-4">
               <input
                 type="text"
+                name="name"
                 placeholder="Ім'я"
                 className="w-[200px] p-3 placeholder-white bg-transparent border-b-2 border-white focus:outline-none focus:border-customOrange"
+                required
               />
             </div>
             <div className="mb-4">
               <input
                 type="tel"
+                name="phone"
                 placeholder="Номер телефону"
                 className="w-[200px] p-3 placeholder-white bg-transparent border-b-2 border-white focus:outline-none focus:border-customOrange"
+                pattern="(\+38|38)?[0-9]{10}"
+                title="Будь ласка, введіть номер телефону у форматі +38XXXXXXXXXX, 38XXXXXXXXXX або 0XXXXXXXXX"
+                required
               />
             </div>
             {/* Кнопка */}
             <div className="flex items-center justify-center mt-4">
               <button
+                type="submit"
                 className="px-8 py-3 bg-white/55 text-gray-700 text-md font-semibold border border-white shadow-[0px_1.3px_2px_2px_rgba(0,0,0,0.15)] hover:text-customOrange transition duration-300"
                 style={{
                   fontWeight: "400",
