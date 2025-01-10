@@ -1,6 +1,6 @@
 import "../../../components/Montserrat.css";
-
 import React from "react";
+import Image from "next/image"; // Import the Image component
 import Navbar from "@/components/main-page/navbar/navbar";
 import Footer from "@/components/main-page/footer/footer";
 import Link from "next/link";
@@ -12,10 +12,12 @@ export default function Project1() {
       <div className="min-h-screen">
         {/* Верхня фотографія */}
         <div className="relative w-screen h-[882px] overflow-hidden pt-[63px]">
-          <img
-            src="/001.png" // Замініть на шлях до вашої фотографії
+          <Image
+            src="/001.png"
             alt="Top Image"
             className="w-full h-full object-cover"
+            width={1920}
+            height={1080}
           />
           {/* Блок з текстом на фотографії */}
           <div className="absolute inset-x-0 bottom-0 flex justify-center">
@@ -46,10 +48,12 @@ export default function Project1() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[1, 2, 3, 4, 5].map((index) => (
               <div key={index} className="flex justify-center">
-                <img
-                  src={`/00${index}.png`} // Замініть на шлях до ваших фотографій
+                <Image
+                  src={`/00${index}.png`}
                   alt={`Image ${index}`}
                   className="w-full h-64 object-cover"
+                  width={500}
+                  height={300}
                 />
               </div>
             ))}
@@ -59,7 +63,7 @@ export default function Project1() {
         {/* Button */}
         <div className="flex items-center justify-center mt-0 mb-16 lg:mt-0">
           <Link
-            href="/projects-page" // Використовуйте `href` замість `to`
+            href="/projects-page"
             className="px-6 py-2 lg:px-8 lg:py-3 bg-white/0 text-gray-700 text-sm lg:text-md font-semibold border border-white hover:text-customOrange transition duration-300"
             style={{
               fontWeight: "400",
@@ -88,7 +92,7 @@ export default function Project1() {
         </h1>
         <div className="flex items-center justify-center mt-4">
           <Link
-            href="/contacts-page" // Вкажіть шлях, на який має вести посилання
+            href="/contacts-page"
             className="mb-24 px-8 py-3 bg-white/55 text-gray-700 text-md font-semibold border border-white shadow-[0px_1.3px_2px_2px_rgba(0,0,0,0.15)] hover:text-customOrange transition duration-300"
             style={{
               fontWeight: "400",
