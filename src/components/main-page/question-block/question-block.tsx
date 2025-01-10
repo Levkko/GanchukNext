@@ -19,7 +19,7 @@ export default function Question() {
           fontWeight: "400",
         }}
       >
-        Зв'яжіться з нами
+        Зв&apos;яжіться з нами
       </h1>
 
       <div className="flex items-center justify-center mt-4">
