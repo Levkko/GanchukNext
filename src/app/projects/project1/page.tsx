@@ -45,7 +45,7 @@ export default function Project1() {
 
         {/* Нижні 5 фотографій */}
         <div className="container mx-auto py-8 mt-8">
-          <div className="flex flex-col items-center space-y-6">
+          <div className="flex flex-col items-center space-y-6 select-none">
             {[1, 2, 3, 4, 5].map((index) => (
               <div
                 key={index}
