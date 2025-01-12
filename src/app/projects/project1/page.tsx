@@ -5,6 +5,9 @@ import Navbar from "@/components/main-page/navbar/navbar";
 import Footer from "@/components/main-page/footer/footer";
 import Link from "next/link";
 
+import { Parallax } from '@/components/Parallax';
+
+
 export default function Project1() {
   return (
     <div>
@@ -12,13 +15,14 @@ export default function Project1() {
       <div className="min-h-screen">
         {/* Верхня фотографія */}
         <div className="relative w-screen h-[882px] overflow-hidden pt-[63px]">
-          <Image
+        <Parallax blur={1} bgImage="/001.png" bgImageAlt="the cat" strength={300} className="w-full h-full" />
+          {/* <Image
             src="/001.png"
             alt="Top Image"
             className="w-full h-full object-cover"
             width={1920}
             height={1080}
-          />
+          /> */}
           {/* Блок з текстом на фотографії */}
           <div className="absolute inset-x-0 bottom-0 flex justify-center">
             <div className="bg-white bg-opacity-70 pl-16 pr-16 pt-16 pb-36 text-center max-w-2xl min-w-[980px] mx-4">
