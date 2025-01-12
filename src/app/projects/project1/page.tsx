@@ -44,17 +44,22 @@ export default function Project1() {
         </div>
 
         {/* Нижні 5 фотографій */}
-        <div className="container mx-auto py-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="container mx-auto py-8 mt-8">
+          <div className="flex flex-col items-center space-y-6">
             {[1, 2, 3, 4, 5].map((index) => (
-              <div key={index} className="flex justify-center">
-                <Image
-                  src={`/00${index}.png`}
-                  alt={`Image ${index}`}
-                  className="w-full h-64 object-cover"
-                  width={500}
-                  height={300}
-                />
+              <div
+                key={index}
+                className="w-[950px] h-[700px] flex justify-center items-center border border-gray-300 shadow-[0px_1.3px_2px_2px_rgba(0,0,0,0.15)]"
+              >
+                <div className="w-[700px] h-[700px]">
+                  <Image
+                    src={`/00${index}.png`}
+                    alt={`Image ${index}`}
+                    className="w-full h-full object-cover"
+                    width={1900}
+                    height={1900}
+                  />
+                </div>
               </div>
             ))}
           </div>
