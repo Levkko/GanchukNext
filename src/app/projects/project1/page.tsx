@@ -1,28 +1,37 @@
 import "../../../components/Montserrat.css";
 import React from "react";
-import Image from "next/image"; // Import the Image component
+import Image from "next/image";
 import Navbar from "@/components/main-page/navbar/navbar";
 import Footer from "@/components/main-page/footer/footer";
 import Link from "next/link";
 
-import { Parallax } from '@/components/Parallax';
-
+import { Parallax } from "@/components/random/parallax/parallax";
+import { SwiperClient } from "@/components/random/swiper/swiper";
 
 export default function Project1() {
+  const images = [
+    { src: "/001.png", alt: "Image 1" },
+    { src: "/002.png", alt: "Image 2" },
+    { src: "/003.png", alt: "Image 3" },
+    { src: "/004.png", alt: "Image 4" },
+    { src: "/005.png", alt: "Image 5" },
+  ];
+
   return (
     <div>
       <Navbar />
-      <div className="min-h-screen">
+      <div>
         {/* Верхня фотографія */}
-        <div className="relative w-screen h-[882px] overflow-hidden pt-[63px]">
-        <Parallax blur={1} bgImage="/001.png" bgImageAlt="the cat" strength={300} className="w-full h-full" />
-          {/* <Image
-            src="/001.png"
-            alt="Top Image"
-            className="w-full h-full object-cover"
-            width={1920}
-            height={1080}
-          /> */}
+        <div className="relative w-screen h-[820px] h-[calc(100vh-62px)] top-[62px] overflow-hidden ">
+          <Parallax speed={-110}>
+            <Image
+              src="/001.png"
+              alt="Top Image"
+              className="w-full h-full object-cover translate-y-[-120px]"
+              width={1920}
+              height={1080}
+            />
+          </Parallax>
           {/* Блок з текстом на фотографії */}
           <div className="absolute inset-x-0 bottom-0 flex justify-center">
             <div className="bg-white bg-opacity-70 pl-16 pr-16 pt-16 pb-36 text-center max-w-2xl min-w-[980px] mx-4">
@@ -47,26 +56,28 @@ export default function Project1() {
           </div>
         </div>
 
-        {/* Нижні 5 фотографій */}
-        <div className="container mx-auto py-8 mt-8">
-          <div className="flex flex-col items-center space-y-6 select-none">
-            {[1, 2, 3, 4, 5].map((index) => (
-              <div
-                key={index}
-                className="w-[950px] h-[700px] flex justify-center items-center border border-gray-300 shadow-[0px_1.3px_2px_2px_rgba(0,0,0,0.15)]"
-              >
-                <div className="w-[700px] h-[700px]">
+        {/* Swiper замість "Нижні 5 фотографій" */}
+        <div className="container mx-auto py-8 mt-24">
+          <SwiperClient
+            slides={images.map((image, index) => (
+              <div key={index} className="flex justify-center items-center">
+                <div className="w-[750px] h-[750px] overflow-hidden">
                   <Image
-                    src={`/00${index}.png`}
-                    alt={`Image ${index}`}
-                    className="w-full h-full object-cover"
+                    src={image.src}
+                    alt={image.alt}
+                    className="w-full h-full object-cover pointer-events-none"
                     width={1900}
                     height={1900}
+                    style={{ userSelect: 'none', pointerEvents: 'none' }}
                   />
                 </div>
               </div>
             ))}
-          </div>
+            swiperProps={{
+              spaceBetween: 50,
+              slidesPerView: 1,
+            }}
+          />
         </div>
 
         {/* Button */}
