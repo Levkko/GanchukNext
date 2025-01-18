@@ -3,7 +3,6 @@ import React from "react";
 import Image from "next/image";
 import Navbar from "@/components/main-page/navbar/navbar";
 import Footer from "@/components/main-page/footer/footer";
-import Link from "next/link";
 
 import { Parallax } from "@/components/random/parallax/parallax";
 
