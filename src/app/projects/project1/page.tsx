@@ -6,37 +6,36 @@ import Footer from "@/components/main-page/footer/footer";
 import Link from "next/link";
 
 import { Parallax } from "@/components/random/parallax/parallax";
-import { SwiperClient } from "@/components/random/swiper/swiper";
+import { getProjectImages } from "@/components/utils/getProjectImages";
 
 export default function Project1() {
-  const images = [
-    { src: "/001.png", alt: "Image 1" },
-    { src: "/002.png", alt: "Image 2" },
-    { src: "/003.png", alt: "Image 3" },
-    { src: "/004.png", alt: "Image 4" },
-    { src: "/005.png", alt: "Image 5" },
-  ];
+  const images = getProjectImages("/projects/project1");
 
   return (
     <div>
       <Navbar />
+      {/* Прозорий блок зверху */}
+      <div className="h-[63px] lg:h-[63px] md:h-[80px] sm:h-[100px]"></div>
+
       <div>
-        {/* Верхня фотографія */}
-        <div className="relative w-screen h-[820px] h-[calc(100vh-62px)] top-[62px] overflow-hidden ">
+        {/* Верхня фотографія для десктопу */}
+        <div className="hidden sm:block h-[919px] overflow-hidden relative lg:h-[919px]">
           <Parallax speed={-110}>
-            <Image
-              src="/001.png"
-              alt="Top Image"
-              className="w-full h-full object-cover translate-y-[-120px]"
-              width={1920}
-              height={1080}
-            />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <Image
+                src="/projects/project1/top-image.jpg"
+                alt="Top Image"
+                className="min-w-full min-h-full object-cover translate-y-[150px] lg:translate-y-[150px]"
+                width={1920}
+                height={1080}
+              />
+            </div>
           </Parallax>
           {/* Блок з текстом на фотографії */}
           <div className="absolute inset-x-0 bottom-0 flex justify-center">
-            <div className="bg-white bg-opacity-70 pl-16 pr-16 pt-16 pb-36 text-center max-w-2xl min-w-[980px] mx-4">
+            <div className="bg-white bg-opacity-70 pl-16 pr-16 pt-16 pb-36 text-center max-w-2xl min-w-[1080px] mx-4 lg:pl-16 lg:pr-16 lg:pt-16 lg:pb-36 lg:max-w-2xl lg:min-w-[1080px]">
               <h1
-                className="text-2xl font-montserrat pb-16"
+                className="text-3xl font-montserrat pb-16 lg:text-3xl lg:pb-16"
                 style={{
                   fontWeight: "400",
                 }}
@@ -45,8 +44,8 @@ export default function Project1() {
                 <br />
                 ПЕРЕДМІСТІ ТЕРНОПОЛЯ
               </h1>
-              <div className="w-[70px] h-[1px] bg-gray-800 my-[5px] mx-auto"></div>
-              <p className="pl-10 pr-10 pt-8 text-[19.5px] leading-[1.28]">
+              <div className="w-[70px] h-[1px] bg-gray-800 my-[5px] mx-auto lg:w-[70px] lg:h-[1px] lg:my-[5px] lg:mx-auto"></div>
+              <p className="pl-8 pr-8 pt-8 text-[22.5px] leading-[1.28] lg:pl-8 lg:pr-8 lg:pt-8 lg:text-[22.5px] lg:leading-[1.28]">
                 Початково він будувався як одноповерховий будинок з горищем. Нам
                 вдалося збільшити корисну житлову площу за рахунок облаштування
                 офісної зони під дахом і великої спальні на горищі. Справжньою
@@ -56,28 +55,62 @@ export default function Project1() {
           </div>
         </div>
 
-        {/* Swiper замість "Нижні 5 фотографій" */}
+        {/* Верхня фотографія для телефону */}
+        <div className="sm:hidden h-[500px] overflow-hidden relative">
+          <Parallax speed={-110}>
+            <div className="absolute inset-0 flex items-center justify-center">
+              <Image
+                src="/projects/project1/top-image.jpg"
+                alt="Top Image Mobile"
+                className="min-w-full min-h-full object-cover translate-y-[100px]"
+                width={800}
+                height={500}
+              />
+            </div>
+          </Parallax>
+          {/* Блок з текстом на фотографії для телефону */}
+          <div className="absolute inset-x-0 bottom-0 flex justify-center">
+            <div className="bg-white bg-opacity-70 pl-8 pr-8 pt-8 pb-16 text-center max-w-md mx-4">
+              <h1
+                className="text-2xl font-montserrat pb-8"
+                style={{
+                  fontWeight: "400",
+                }}
+              >
+                БУДИНОЧОК ДЛЯ МОЛОДОЇ СІМ&apos;Ї В
+                <br />
+                ПЕРЕДМІСТІ ТЕРНОПОЛЯ
+              </h1>
+              <div className="w-[50px] h-[1px] bg-gray-800 my-[5px] mx-auto"></div>
+              <p className="pl-4 pr-4 pt-4 text-[18px] leading-[1.28]">
+                Початково він будувався як одноповерховий будинок з горищем. Нам
+                вдалося збільшити корисну житлову площу за рахунок облаштування
+                офісної зони під дахом і великої спальні на горищі. Справжньою
+                прикрасою вітальні стали камін і сходи.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Фотографії в колоні */}
         <div className="container mx-auto py-8 mt-24">
-          <SwiperClient
-            slides={images.map((image, index) => (
-              <div key={index} className="flex justify-center items-center">
-                <div className="w-[750px] h-[750px] overflow-hidden">
-                  <Image
-                    src={image.src}
-                    alt={image.alt}
-                    className="w-full h-full object-cover pointer-events-none"
-                    width={1900}
-                    height={1900}
-                    style={{ userSelect: 'none', pointerEvents: 'none' }}
-                  />
-                </div>
+          {images.map((image, index) => (
+            <div
+              key={index}
+              className="flex justify-center items-center mb-8 px-4 lg:px-0"
+            >
+              <div className="w-full max-w-[1200px] overflow-hidden">
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  className="w-full h-auto object-cover pointer-events-none"
+                  width={1200}
+                  height={800}
+                  style={{ userSelect: "none", pointerEvents: "none" }}
+                />
               </div>
-            ))}
-            swiperProps={{
-              spaceBetween: 50,
-              slidesPerView: 1,
-            }}
-          />
+            </div>
+          ))}
         </div>
 
         {/* Button */}
