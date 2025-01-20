@@ -7,7 +7,10 @@ export function getProjectImages(projectFolder: string): { src: string; alt: str
 
   try {
     const files = fs.readdirSync(directoryPath);
-    return files.map((file) => ({
+
+    const filteredFiles = files.filter(file => !file.startsWith('top-image'));
+
+    return filteredFiles.map((file) => ({
       src: `${projectFolder}/${file}`,
       alt: `Image ${file}`,
     }));

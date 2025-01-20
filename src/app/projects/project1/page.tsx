@@ -19,7 +19,7 @@ export default function Project1() {
 
       <div>
         {/* Верхня фотографія для десктопу */}
-        <div className="hidden lg:block h-[919px] overflow-hidden relative lg:h-[919px]">
+        <div className="hidden lg:block h-[919px] overflow-hidden relative lg:h-[819px]">
           <Parallax speed={-110}>
             <div className="absolute inset-0 flex items-center justify-center">
               <Image
@@ -28,7 +28,7 @@ export default function Project1() {
                 className="min-w-full min-h-full object-cover translate-y-[150px] lg:translate-y-[150px]"
                 width={1920}
                 height={1080}
-                priority // Додано для пріоритетного завантаження
+                priority
               />
             </div>
           </Parallax>
@@ -36,7 +36,7 @@ export default function Project1() {
           <div className="absolute inset-x-0 bottom-0 flex justify-center">
             <div className="bg-white bg-opacity-70 pl-16 pr-16 pt-16 pb-36 text-center max-w-2xl min-w-[1080px] mx-4 lg:pl-16 lg:pr-16 lg:pt-16 lg:pb-36 lg:max-w-2xl lg:min-w-[1080px]">
               <h1
-                className="text-3xl font-montserrat pb-16 lg:text-3xl lg:pb-16"
+                className="text-2xl font-montserrat pb-10 lg:text-2xl lg:pb-10"
                 style={{
                   fontWeight: "400",
                 }}
@@ -46,7 +46,7 @@ export default function Project1() {
                 ПЕРЕДМІСТІ ТЕРНОПОЛЯ
               </h1>
               <div className="w-[70px] h-[1px] bg-gray-800 my-[5px] mx-auto lg:w-[70px] lg:h-[1px] lg:my-[5px] lg:mx-auto"></div>
-              <p className="pl-8 pr-8 pt-8 text-[22.5px] leading-[1.28] lg:pl-8 lg:pr-8 lg:pt-8 lg:text-[22.5px] lg:leading-[1.28]">
+              <p className="pl-8 pr-8 pt-8 text-[20px] leading-[1.28] lg:pl-8 lg:pr-8 lg:pt-8 lg:text-[20px] lg:leading-[1.28]">
                 Початково він будувався як одноповерховий будинок з горищем. Нам
                 вдалося збільшити корисну житлову площу за рахунок облаштування
                 офісної зони під дахом і великої спальні на горищі. Справжньою
@@ -58,18 +58,21 @@ export default function Project1() {
 
         {/* Верхня фотографія для телефону */}
         <div className="lg:hidden h-[650px] overflow-hidden relative">
-          <div className="absolute inset-0">
-            <Image
-              src="/projects/project1/top-image.jpg"
-              alt="Top Image Mobile"
-              className="w-full h-full object-cover object-top"
-              width={1920}
-              height={1080}
-            />
-          </div>
+          <Parallax speed={-110}>
+            <div className="absolute">
+              <Image
+                src="/projects/project1/top-image.jpg"
+                alt="Top Image"
+                className="object-cover min-w-[800px] min-h-[800px] translate-y-[-304px]"
+                width={1920}
+                height={1080}
+                priority
+              />
+            </div>
+          </Parallax>
           {/* Блок з текстом на фотографії для телефону */}
           <div className="absolute inset-x-0 bottom-0 flex justify-center">
-            <div className="bg-white bg-opacity-80 pl-8 pr-8 pt-8 pb-16 text-center max-w-md mx-4">
+            <div className="bg-white bg-opacity-80 pl-8 pr-8 pt-8 pb-16 text-center md:max-w-xl sm:max-w-md max-w-md mx-4">
               <h1
                 className="text-2xl font-montserrat pb-8"
                 style={{
@@ -96,9 +99,9 @@ export default function Project1() {
           {images.map((image, index) => (
             <div
               key={index}
-              className="flex justify-center items-center mb-8 px-4 lg:px-0"
+              className="flex justify-center items-center mb-3 px-4 lg:px-0"
             >
-              <div className="w-full max-w-[1200px] overflow-hidden">
+              <div className="w-full max-w-[800px] overflow-hidden">
                 <Image
                   src={image.src}
                   alt={image.alt}
